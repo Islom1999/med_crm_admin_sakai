@@ -130,7 +130,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: "Kassa", 
                                 icon: 'pi pi-fw pi-chart-line', 
-                                // routerLink: ['/'],
+                                // routerLink: ['/'], 
                             }
                         ] 
                     },
