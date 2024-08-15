@@ -1,0 +1,72 @@
+<div class="grid p-fluid">
+    <div class="col-12">
+        <div class="card">
+            <div class="flex align-items-center justify-content-center">
+                <div class="col-12">
+                    <form [formGroup]="$form" (submit)="$submit()">
+                        <div class="field">
+                            <label for="name">nomi</label>
+                            <input formControlName="name" id="name" pInputText type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                        </div>
+                        <div class="field">
+                            <label>turi</label>
+                            <p-dropdown 
+                                [options]="type" 
+                                formControlName="type" 
+                                [showClear]="true"
+                            ></p-dropdown>
+                        </div>
+                        <div class="field">
+                            <label>hodim</label>
+                            <p-dropdown 
+                                [options]="staff" 
+                                optionLabel="fullname" 
+                                optionValue="id" 
+                                formControlName="staff_id" 
+                                [filter]="true"
+                                [showClear]="true"
+                            ></p-dropdown>
+                        </div>
+                        <div class="field">
+                            <label>interval vaqti</label>
+                            <p-inputNumber 
+                                formControlName="duration" 
+                                mode="decimal" 
+                                suffix=" minut"
+                                [showButtons]="true" 
+                                [min]="0" [max]="120"
+                                [step]="5" 
+                                [useGrouping]="false"
+                            >
+                            </p-inputNumber>
+                        </div>
+                        <div class="field">
+                            <label>narxi</label>
+                            <p-inputNumber 
+                                formControlName="amount" 
+                                mode="currency"
+                                currency="UZS" 
+                                locale="de-DE"
+                                [showButtons]="true" 
+                                [min]="0" [max]="20000000"
+                                [step]="5000" 
+                                [useGrouping]="true"
+                            >
+                            </p-inputNumber>
+                        </div>
+                        <div class="field">
+                            <label for="">ma'lumot</label>
+                            <div>
+                                <p-editor formControlName="desc"/>
+                            </div>
+                        </div>
+                        <div class="mt-5 flex gap-3">
+                            <button type="button" pButton [label]="'qaytish'" class="text-center p-button-secondary" (click)="$back()"></button>
+                            <button pButton [label]="$id ? 'o\'zgartirish' : 'qo\'shish'" class="text-center" [disabled]="$disableBtn"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

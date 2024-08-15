@@ -1,0 +1,26 @@
+<div class="grid p-fluid">
+    <div class="col-12">
+        <div class="card">
+            <div class="flex align-items-center justify-content-center">
+                <div class="col-12">
+                    <form [formGroup]="$form" (submit)="$submit()">
+                        <div class="field">
+                            <label for="name">nomi</label>
+                            <input formControlName="name" id="name" pInputText type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                        </div>
+                        <div class="field">
+                            <label for="permissions">ruxsatlari</label>
+                            <div>
+                                <p-editor formControlName="descr"/>
+                            </div>
+                        </div>
+                        <div class="mt-5 flex gap-3">
+                            <button type="button" pButton [label]="'qaytish'" class="text-center p-button-secondary" (click)="$back()"></button>
+                            <button pButton [label]="$id ? 'o\'zgartirish' : 'qo\'shish'" class="text-center" [disabled]="$disableBtn"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
