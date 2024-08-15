@@ -25,6 +25,6 @@ jobs:
         script: |
           cd ~/med_crm_admin_sakai/
           git pull
-          npm install
+          npm install --legacy-peer-deps
           ng build
           sudo rsync -av --delete /root/med_crm_admin_sakai/dist/med-admin/ /var/www/med_crm_admin/
