@@ -25,9 +25,9 @@ export abstract class BaseComponentList<T> implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.$permission.getPermisssion().subscribe(permission => {
-      this.$permissionSrv.loadPermissions(permission);
-    })
+    // this.$permission.getPermisssion().subscribe(permission => {
+    //   this.$permissionSrv.loadPermissions(permission);
+    // })
   }
 
   $onGlobalFilter(table: Table, event: Event) {

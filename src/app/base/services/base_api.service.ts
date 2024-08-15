@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { IPagination } from '../../../interfaces/pagination';
-// import { Cacheable } from 'ngx-cacheable';
+import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
   providedIn: 'root',
@@ -24,16 +24,19 @@ export abstract class BaseApiService<T> {
       .subscribe();
   }
 
+  @Cacheable()
   getAll(params?: HttpParams): Observable<T[]> {
     return this.http.get<T[]>(`${this.apiUrl}`, { params });
   }
 
+  @Cacheable()
   getAllPanination(params?: HttpParams): Observable<IPagination<T[]>> {
     return this.http.get<IPagination<T[]>>(`${this.apiUrl}/pagination`, {
       params,
     });
   }
 
+  @Cacheable()
   getById(id: string | undefined): Observable<T> {
     if(!id) return of()
     return this.http.get<T>(`${this.apiUrl}/${id}`);

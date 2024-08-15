@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Permission } from '../../../enumerations';
+import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class PermissionService {
 
   constructor(private http: HttpClient) {}
   
+  @Cacheable()
   getPermisssion(): Observable<Permission[]> {
     const url = `${this.apiUrl}/permission`;
     return this.http.get<Permission[]>(url);
