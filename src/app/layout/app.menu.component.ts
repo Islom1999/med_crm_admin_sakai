@@ -82,7 +82,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: "Bayramlar", 
                                 icon: 'pi pi-fw pi-calendar-minus', 
-                                routerLink: ['/'],
+                                // routerLink: ['/'],
                             }
                         ] 
                     },
