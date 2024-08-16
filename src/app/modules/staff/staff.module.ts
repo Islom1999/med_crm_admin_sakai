@@ -4,6 +4,7 @@ import { StaffDetailComponent, StaffListComponent } from './components';
 import { RouterModule, Routes } from '@angular/router';
 import { canActivatePermission } from 'src/app/shared';
 import { BaseModule } from 'src/app/base';
+import { PasswordModule } from 'primeng/password';
 
 const routes: Routes = [
   {
@@ -24,6 +25,8 @@ const routes: Routes = [
     CommonModule,
     BaseModule,
     RouterModule.forChild(routes),
+
+    PasswordModule,
   ]
 })
 export class StaffModule { }

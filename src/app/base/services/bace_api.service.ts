@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { finalize, switchMap, tap } from 'rxjs/operators';
 import { IPagination } from '../../../interfaces/pagination';
 import { Cacheable } from 'ngx-cacheable';
 
@@ -10,26 +10,31 @@ import { Cacheable } from 'ngx-cacheable';
 })
 export abstract class BaseApiService<T> {
   private _dataSubject = new BehaviorSubject<T[]>([]);
+  private _loadingSubject = new BehaviorSubject<Boolean>(true);
   readonly _data: Observable<T[]> = this._dataSubject.asObservable();
+  readonly _loading: Observable<Boolean> = this._loadingSubject.asObservable()
 
   constructor(protected http: HttpClient, protected apiUrl: string, protected params?:HttpParams) {
-    this.loadAll(params)
+    this.loadAll()
   }
 
   loadAll(params?: HttpParams) {
     this.http.get<T[]>(`${this.apiUrl}`, { params })
       .pipe(
-        tap(data => this._dataSubject.next(data))
+        tap(data => {
+          this._dataSubject.next(data);
+          this._loadingSubject.next(false);
+        })
       )
-      .subscribe();
+      .subscribe(); 
   }
 
-  @Cacheable()
+  // @Cacheable()
   getAll(params?: HttpParams): Observable<T[]> {
     return this.http.get<T[]>(`${this.apiUrl}`, { params });
   }
 
-  @Cacheable()
+  // @Cacheable()
   getAllPanination(params?: HttpParams): Observable<IPagination<T[]>> {
     return this.http.get<IPagination<T[]>>(`${this.apiUrl}/pagination`, {
       params,

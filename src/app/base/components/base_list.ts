@@ -5,14 +5,14 @@ import { PermissionService } from '../../shared/services/permission.service';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
-import { BaseApiService } from '../services/base_api.service';
+import { BaseApiService } from '../services/bace_api.service';
 
 @Component({
   template:'',
   providers: [DialogService]
 })
 export abstract class BaseComponentList<T> implements OnInit {
-  $loading = false
+  $loading: Observable<Boolean> = this.$baseSrv._loading.pipe()
   $data: Observable<T[]> = this.$baseSrv._data.pipe()
   $ref: DynamicDialogRef | undefined;
 

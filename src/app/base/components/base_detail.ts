@@ -5,8 +5,8 @@ import { PermissionService } from '../../shared/services/permission.service';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
-import { BaseApiService } from '../services/base_api.service';
 import { FormGroup } from '@angular/forms';
+import { BaseApiService } from '../services/bace_api.service';
 
 @Component({
   template:'',
@@ -29,8 +29,8 @@ export abstract class BaseDetailComponentList<T> {
     ngOnInit(): void {
         this.$id = this.$config.data.id;
         if (this.$id) {
-          this.$baseSrv.getById(this.$id).subscribe((role) => {
-            this.$form.patchValue(role);
+          this.$baseSrv.getById(this.$id).subscribe((data) => {
+            this.$form.patchValue(data);
             this.$disableBtn = false;
             this.$loading = false;
           });

@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 })
 export class ServicesDetailComponent extends BaseDetailComponentList<IServices> {
   type: any[] = Object.values(ServiceType);
-  staff!:IStaff[]
+  staff!: IStaff[]
 
   constructor(
     private baseSrv: ServicesService,
@@ -36,27 +36,14 @@ export class ServicesDetailComponent extends BaseDetailComponentList<IServices> 
     // forma elementlari
     this.$form = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      desc : new FormControl('', [Validators.required]),
-      amount : new FormControl('', [Validators.required]),
-      duration : new FormControl('', [Validators.required]),
-      type : new FormControl('', [Validators.required]),
-      staff_id : new FormControl('', [Validators.required]),
+      desc: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [Validators.required]),
+      duration: new FormControl('', [Validators.required]),
+      type: new FormControl('', [Validators.required]),
+      staff_id: new FormControl('', [Validators.required]),
     });
 
     // id ga qarab update yoki create ni aniqlaydi parentda
     super.ngOnInit()
   }
-
-  filterCountry(event: any) {
-    const filtered: any[] = [];
-    const query = event.query;
-    for (let i = 0; i < this.staff.length; i++) {
-        const staff = this.staff[i];
-        if (staff.fullname.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-            filtered.push(staff);
-        }
-    }
-
-    this.staff = filtered;
-}
 }

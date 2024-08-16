@@ -13,7 +13,8 @@ import { EditorModule } from 'primeng/editor';
 import { DropdownModule } from "primeng/dropdown";
 import { InputNumberModule } from 'primeng/inputnumber';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { CustomCurrencyPipe } from "src/app/shared";
+import { SkeletonModule } from 'primeng/skeleton';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     declarations:[
@@ -35,6 +36,8 @@ import { CustomCurrencyPipe } from "src/app/shared";
         DropdownModule,
         InputNumberModule,
         AutoCompleteModule,
+        SkeletonModule,
+        CalendarModule,
     ],
     exports: [
         CommonModule,
@@ -52,6 +55,8 @@ import { CustomCurrencyPipe } from "src/app/shared";
         DropdownModule,
         InputNumberModule,
         AutoCompleteModule,
+        SkeletonModule,
+        CalendarModule,
 
         // pipe 
     ],
