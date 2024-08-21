@@ -4,6 +4,7 @@ import { RoomsDetailComponent, RoomsListComponent } from './components';
 import { RouterModule, Routes } from '@angular/router';
 import { canActivatePermission } from 'src/app/shared';
 import { BaseModule } from 'src/app/base';
+import { TreeTableModule } from 'primeng/treetable';
 
 const routes: Routes = [
   {
@@ -24,6 +25,8 @@ const routes: Routes = [
     CommonModule,
     BaseModule,
     RouterModule.forChild(routes),
+
+    TreeTableModule
   ]
 })
 export class RoomsModule { }

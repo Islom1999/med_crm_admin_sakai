@@ -58,9 +58,10 @@ export abstract class BaseDetailComponentList<T> {
       }
     }
   
-    $create() {
+    $create(obj?:Object) {
+      const data = obj ? obj : {...this.$form.value}
       this.$baseSrv
-        .create(this.$form.value)
+        .create({...data})
         .pipe(
           catchError(({ error }) => {
             this.$messageService.add({ severity: 'error', summary: `Error ${error.code}`, detail: `Eror message: ${error.message}` })
@@ -74,9 +75,10 @@ export abstract class BaseDetailComponentList<T> {
         });
     }
   
-    $update(id: string) {
+    $update(id: string, obj?:Object) {
+      const data = obj ? obj : {...this.$form.value}
       this.$baseSrv
-        .update(id, this.$form.value)
+        .update(id, {...data})
         .pipe(
           catchError(({ error }) => {
             this.$messageService.add({ severity: 'error', summary: `Error ${error.code}`, detail: `Eror message: ${error.message}` })

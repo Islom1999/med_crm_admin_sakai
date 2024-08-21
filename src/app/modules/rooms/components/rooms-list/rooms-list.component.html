@@ -1,1 +1,123 @@
-<p>rooms-list works!</p>
+<div class="card">
+    <div class="grid">
+        <div class="col-12">
+            <div class="card">
+                <h5>Row Expand</h5>
+                <p-table [value]="$data | async" dataKey="id" responsiveLayout="scroll">
+                    <ng-template pTemplate="caption">
+                        <ng-container *ngxPermissionsOnly="['super']">
+                            <button (click)="showUpdateModal(1)" pButton icon="pi pi-plus-circle" class="p-button-primary"></button>
+                        </ng-container>
+                        <div class="flex table-header">
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr >
+                            <th style="width: 3rem"></th>
+                            <th pSortableColumn="name">Nomi <p-sortIcon field="name"></p-sortIcon></th>
+                            <th pSortableColumn="price">statusi<p-sortIcon field="price"></p-sortIcon></th>
+                            <th pSortableColumn="category">holati<p-sortIcon field="category"></p-sortIcon></th>
+                            <th pSortableColumn="rating">o'zgartirilgan<p-sortIcon field="rating"></p-sortIcon></th>
+                            <th pSortableColumn="rating">boshqarish</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-data_item let-expanded="expanded">
+                        <tr class="bg-blue-100">
+                            <td>
+                                <button type="button" pButton pRipple [pRowToggler]="data_item"
+                                    class="p-button-text p-button-rounded p-button-plain"
+                                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                            </td>
+                            <td style="min-width: 12rem;">{{data_item.room_name}}</td>
+                            <td style="min-width: 10rem;">
+                                <span [class]="'customer-badge status-proposal mx-1'">{{data_item.is_occupied ? "Band" : "Bo'sh"}}</span>
+                            </td>
+                            <td>
+                                <span [class]="'customer-badge status-' + (data_item.state == 1 ? 'qualified':'unqualified')">{{data_item.state == 1 ? 'active':"deleted"}}</span>
+                            </td>
+                            <td>
+                                {{data_item.updated_id}} ta o'zgartirilgan
+                            </td>
+                            <td class="table-action">
+                                <span class="p-buttonset">
+                                    <ng-container *ngxPermissionsOnly="['super']">
+                                        <button *ngIf="data_item.state == 1" (click)="showUpdateModal(2, data_item.id)" pButton icon="pi pi-plus-circle" class="p-button-primary"></button>
+                                    </ng-container>
+                                    <ng-container *ngxPermissionsOnly="['super']">
+                                        <button *ngIf="data_item.state == 1" (click)="showUpdateModal(1, null, data_item.id)" pButton icon="pi pi-pencil" class="p-button-info"></button>
+                                    </ng-container>
+                                    <ng-container *ngxPermissionsOnly="['super']">
+                                        <button *ngIf="data_item.state == 1" (click)="$delete(data_item.id)" pButton icon="pi pi-trash" class="p-button-danger"></button>
+                                    </ng-container>
+                                    <ng-container *ngxPermissionsOnly="['super']">
+                                        <button *ngIf="data_item.state == 0" (click)="$repair(data_item.id)" pButton icon="pi pi pi-refresh" class="p-button-warning"></button>
+                                    </ng-container>
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="rowexpansion" let-data_item>
+                        <tr class="bg-blue-50">
+                            <td colspan="7">
+                                <div class="p-3">
+                                    <p-table [value]="data_item.children" dataKey="id" responsiveLayout="scroll">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <!-- <th style="width: 3rem"></th> -->
+                                                <th pSortableColumn="name">Nomi <p-sortIcon field="name"></p-sortIcon></th>
+                                                <th pSortableColumn="price">statusi<p-sortIcon field="price"></p-sortIcon></th>
+                                                <th pSortableColumn="category">holati<p-sortIcon field="category"></p-sortIcon></th>
+                                                <th pSortableColumn="rating">o'zgartirilgan<p-sortIcon field="rating"></p-sortIcon></th>
+                                                <th pSortableColumn="rating">boshqarish</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-item>
+                                            <tr>
+                                                <!-- <td>
+                                                    <button type="button" pButton pRipple [pRowToggler]="item"
+                                                        class="p-button-text p-button-rounded p-button-plain"
+                                                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                                                </td> -->
+                                                <td style="min-width: 12rem;">{{item.room_name}}</td>
+                                                <td style="min-width: 10rem;">
+                                                    <span [class]="'customer-badge status-proposal mx-1'">{{item.is_occupied ? "Band" : "Bo'sh"}}</span>
+                                                </td>
+                                                <td>
+                                                    <span [class]="'customer-badge status-' + (item.state == 1 ? 'qualified':'unqualified')">{{item.state == 1 ? 'active':"deleted"}}</span>
+                                                </td>
+                                                <td>
+                                                    {{item.updated_id}} ta o'zgartirilgan
+                                                </td>
+                                                <td class="table-action">
+                                                    <span class="p-buttonset">
+                                                        <!-- <ng-container *ngxPermissionsOnly="['super']">
+                                                            <button *ngIf="data_item.state == 1" (click)="showUpdateModal(3, item.id)" pButton icon="pi pi-plus-circle" class="p-button-primary"></button>
+                                                        </ng-container> -->
+                                                        <ng-container *ngxPermissionsOnly="['super']">
+                                                            <button *ngIf="item.state == 1" (click)="showUpdateModal(2, data_item.id, item.id)" pButton icon="pi pi-pencil" class="p-button-info"></button>
+                                                        </ng-container>
+                                                        <ng-container *ngxPermissionsOnly="['super']">
+                                                            <button *ngIf="item.state == 1" (click)="$delete(item.id)" pButton icon="pi pi-trash" class="p-button-danger"></button>
+                                                        </ng-container>
+                                                        <ng-container *ngxPermissionsOnly="['super']">
+                                                            <button *ngIf="item.state == 0" (click)="$repair(item.id)" pButton icon="pi pi pi-refresh" class="p-button-warning"></button>
+                                                        </ng-container>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="emptymessage">
+                                            <tr>
+                                                <td colspan="6">There are no item for this data_item yet.</td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

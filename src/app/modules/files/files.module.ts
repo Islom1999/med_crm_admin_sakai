@@ -1,34 +1,37 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StaffDetailComponent, StaffListComponent } from './components';
+import { FilesDetailComponent, FilesListComponent } from './components';
+import { BaseModule } from 'src/app/base';
 import { RouterModule, Routes } from '@angular/router';
 import { canActivatePermission } from 'src/app/shared';
-import { BaseModule } from 'src/app/base';
-import { PasswordModule } from 'primeng/password';
+import { CardModule } from 'primeng/card';
+import { TagModule } from 'primeng/tag';
 import { FileUploadModule } from 'primeng/fileupload';
+import { FilesInfoComponent } from './components/files-info/files-info.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: StaffListComponent,
+    component: FilesListComponent,
     canActivate: [canActivatePermission],
     data: { permissions: ['super'] },
   }
 ];
 
-
 @NgModule({
   declarations: [
-    StaffListComponent,
-    StaffDetailComponent
+    FilesListComponent,
+    FilesDetailComponent,
+    FilesInfoComponent
   ],
   imports: [
     CommonModule,
     BaseModule,
     RouterModule.forChild(routes),
 
-    PasswordModule,
+    CardModule,
+    TagModule,
     FileUploadModule,
   ]
 })
-export class StaffModule { }
+export class FilesModule { }

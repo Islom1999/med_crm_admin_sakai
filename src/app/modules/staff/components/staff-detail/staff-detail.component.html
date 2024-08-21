@@ -6,92 +6,91 @@
                 <p-skeleton styleClass="mb-2" />
                 <p-skeleton height="5rem" styleClass="mb-2" />
                 <div class="flex justify-content-evenly mt-3">
-                    <p-skeleton styleClass="mb-2" width="15rem" height="2rem"/>
-                    <p-skeleton styleClass="mb-2" width="15rem" height="2rem"/> 
+                    <p-skeleton styleClass="mb-2" width="15rem" height="2rem" />
+                    <p-skeleton styleClass="mb-2" width="15rem" height="2rem" />
                 </div>
             </ng-container>
-            
+
             <ng-container *ngIf="!$loading">
+
+                
+
                 <div class="flex align-items-center justify-content-center">
-                    <div class="col-12">
+                    <div class="col-8">
                         <form [formGroup]="$form" (submit)="$submit()">
                             <div class="p-fluid p-formgrid grid">
-                                <div class="field col-12 md:col-4">
+                                <div class="field col-12 md:col-3">
                                     <label>passport seriasi</label>
-                                    <input formControlName="series_document" pInputText type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                                    <p-inputMask  
+                                        (change)="setPerson()" 
+                                        mask="(aa) 9999999"
+                                        formControlName="series_document" 
+                                    >
+                                    </p-inputMask>
                                 </div>
-                                <div class="field col-12 md:col-4">
+                                <div class="field col-12 md:col-3">
                                     <label>tug'ilgan sanasi</label>
-                                    <p-calendar 
-                                        type="date" 
-                                        dateFormat="dd.mm.yy"
-                                        formControlName="date_of_birth"
-                                        [showIcon]="true"
-                                    />
+                                    <p-calendar type="date" dateFormat="dd.mm.yy" formControlName="date_of_birth"
+                                        [showIcon]="true" (change)="setPerson()" />
                                 </div>
-                                <div class="field col-12 md:col-4">
+                                <div class="field col-12 md:col-3">
                                     <label>pinfil</label>
-                                    <input formControlName="pinfl" pInputText type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                                    <input formControlName="pinfl" pInputText type="text"
+                                        class="">
                                 </div>
-                                <div class="field col-12 md:col-4">
-                                    <label>fullname</label>
-                                    <input formControlName="fullname" pInputText type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-                                </div>
-                                <div class="field col-12 md:col-4">
-                                    <label>millati</label>
-                                    <input formControlName="nationality" pInputText type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-                                </div>
-                                <div class="field col-12 md:col-4">
-                                    <label>manzili</label>
-                                    <input formControlName="address" pInputText type="email" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
-                                </div>
-                                <div class="field col-12 md:col-4">
-                                    <label>bo'limi</label>
-                                    <p-dropdown 
-                                        [options]="department" 
-                                        optionLabel="name" 
-                                        optionValue="id" 
-                                        formControlName="department_id" 
-                                        [filter]="true"
-                                        [showClear]="false"
-                                    ></p-dropdown>
-                                </div>
-                                <div class="field col-12 md:col-4">
-                                    <label>lavozimi</label>
-                                    <p-dropdown 
-                                        [options]="role" 
-                                        optionLabel="name" 
-                                        optionValue="id" 
-                                        formControlName="role_id" 
-                                        [filter]="true"
-                                        [showClear]="false"
-                                    ></p-dropdown>
-                                </div>
-                                <div class="field col-12 md:col-4">
-                                    <label>turi</label>
-                                    <p-dropdown 
-                                        [options]="type" 
-                                        formControlName="staff_type" 
-                                        [showClear]="true"
-                                    ></p-dropdown>
-                                </div>
-
-                                <!-- <div class="field col-12 md:col-6">
+                                <div class="field col-12 md:col-3">
                                     <label>jinsi</label>
                                     <p-dropdown 
                                         [options]="gender" 
                                         formControlName="gender" 
                                         [showClear]="true"
                                     ></p-dropdown>
-                                </div> -->
-                                
+                                </div>
+
+                                <div class="field col-12 md:col-3">
+                                    <label>millati</label>
+                                    <input formControlName="nationality" pInputText type="text"
+                                        class="">
+                                </div>
+                                <div class="field col-12 md:col-4">
+                                    <label>fullname</label>
+                                    <input formControlName="fullname" pInputText type="text"
+                                        class="">
+                                </div>
+                                <div class="field col-12 md:col-5">
+                                    <label>manzili</label>
+                                    <input formControlName="address" pInputText type="email"
+                                        class="">
+                                </div>
+                                <div class="field col-12 md:col-4">
+                                    <label>bo'limi</label>
+                                    <p-dropdown [options]="department" optionLabel="name" optionValue="id"
+                                        formControlName="department_id" [filter]="true"
+                                        [showClear]="false"></p-dropdown>
+                                </div>
+                                <div class="field col-12 md:col-4">
+                                    <label>lavozimi</label>
+                                    <p-dropdown [options]="role" optionLabel="name" optionValue="id"
+                                        formControlName="role_id" [filter]="true" [showClear]="false"></p-dropdown>
+                                </div>
+                                <div class="field col-12 md:col-4">
+                                    <label>turi</label>
+                                    <p-dropdown [options]="type" formControlName="staff_type"
+                                        [showClear]="true"></p-dropdown>
+                                </div>
+
                                 <div class="field col-12 md:col-4">
                                     <label>molile raqam</label>
-                                    <input formControlName="phone" pInputText type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                                    <p-inputMask 
+                                        mask="(99) 999-99-99" 
+                                        formControlName="phone" 
+                                        class="">
+                                    </p-inputMask>
                                 </div>
                                 <div class="field col-12 md:col-4">
                                     <label>email</label>
-                                    <input formControlName="email" pInputText type="email" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                                    <input formControlName="email" pInputText type="email"
+                                        class="">
                                 </div>
                                 <div class="field col-12 md:col-4">
                                     <label>password</label>
@@ -112,21 +111,53 @@
                                         </ng-template>
                                     </p-password>
                                 </div>
-                                
-                                
-    
+
+
+
                                 <div class="field col-12">
                                     <label for="">ma'lumot</label>
                                     <div>
-                                        <p-editor formControlName="bio"/>
+                                        <p-editor formControlName="bio" />
                                     </div>
                                 </div>
                             </div>
                             <div class="mt-5 flex gap-3">
-                                <button type="button" pButton [label]="'qaytish'" class="text-center p-button-secondary" (click)="$back()"></button>
-                                <button pButton [label]="$id ? 'o\'zgartirish' : 'qo\'shish'" class="text-center" [disabled]="$disableBtn"></button>
+                                <button type="button" pButton [label]="'qaytish'" class="text-center p-button-secondary"
+                                    (click)="$back()"></button>
+                                <button pButton [label]="$id ? 'o\'zgartirish' : 'qo\'shish'" class="text-center"
+                                    [disabled]="$disableBtn"></button>
                             </div>
                         </form>
+                    </div>
+                    <div class="col-4">
+                        <div class="card flex justify-content-center align-items-center flex-column">
+                            <p-image 
+                                [src]="imageSrc" 
+                                [previewImageSrc]="imageSrc" 
+                                alt="Image" 
+                                width="250" 
+                                [preview]="true" />
+
+                            <div class="flex gap-3">
+                                <p-fileUpload 
+                                    mode="basic" 
+                                    name="demo[]" 
+                                    chooseIcon="pi pi-upload" 
+                                    url="https://www.primefaces.org/cdn/api/upload.php" 
+                                    accept="image/*" maxFileSize="1000000" 
+                                    (onUpload)="onBasicUploadAuto($event)"  
+                                    [auto]="true" 
+                                    chooseLabel="yuklash" 
+                                />
+                                <button 
+                                    pButton 
+                                    icon="pi pi-trash" 
+                                    class="p-button-danger"
+                                >o'chirish</button>
+                            </div>
+                            
+                            
+                        </div>
                     </div>
                 </div>
             </ng-container>

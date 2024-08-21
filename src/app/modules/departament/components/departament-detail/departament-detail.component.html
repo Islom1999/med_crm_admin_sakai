@@ -23,7 +23,9 @@
                                 <div class="field col-12">
                                     <label for="permissions">ruxsatlari</label>
                                     <div>
-                                        <p-editor formControlName="descr"/>
+                                        <!-- <p-editor formControlName="descr"/> -->
+
+                                        <ckeditor [config]="editorConfig" formControlName="descr" [editor]="Editor"></ckeditor>
                                     </div>
                                 </div>
                             </div>

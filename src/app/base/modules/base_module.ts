@@ -15,6 +15,10 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SkeletonModule } from 'primeng/skeleton';
 import { CalendarModule } from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { ImageModule } from 'primeng/image';
+import { NgxDocViewerModule } from "ngx-doc-viewer";
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
     declarations:[
@@ -26,24 +30,8 @@ import { CalendarModule } from 'primeng/calendar';
         ToastModule,
         ReactiveFormsModule,
 
-        // PrimeNG
-        TableModule,
-        InputTextModule,
-        MultiSelectModule,
-        ConfirmDialogModule,
-        InputTextareaModule,
-        EditorModule,
-        DropdownModule,
-        InputNumberModule,
-        AutoCompleteModule,
-        SkeletonModule,
-        CalendarModule,
-    ],
-    exports: [
-        CommonModule,
-        HttpClientModule,
-        NgxPermissionsModule,
-        ReactiveFormsModule,
+        NgxDocViewerModule,
+        CKEditorModule,
 
         // PrimeNG
         TableModule,
@@ -57,6 +45,32 @@ import { CalendarModule } from 'primeng/calendar';
         AutoCompleteModule,
         SkeletonModule,
         CalendarModule,
+        InputMaskModule,
+        ImageModule,
+    ],
+    exports: [
+        CommonModule,
+        HttpClientModule,
+        NgxPermissionsModule,
+        ReactiveFormsModule,
+
+        NgxDocViewerModule,
+        CKEditorModule,
+
+        // PrimeNG
+        TableModule,
+        InputTextModule,
+        MultiSelectModule,
+        ConfirmDialogModule,
+        InputTextareaModule,
+        EditorModule,
+        DropdownModule,
+        InputNumberModule,
+        AutoCompleteModule,
+        SkeletonModule,
+        CalendarModule,
+        InputMaskModule,
+        ImageModule,
 
         // pipe 
     ],

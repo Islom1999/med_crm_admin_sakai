@@ -28,7 +28,7 @@ export class StaffListComponent extends BaseComponentList<IStaff> {
   showUpdateModal(id?:string) {
     this.$ref = this.$dialogService.open(StaffDetailComponent, {
       header: id ? "Xodimlar o'zgartirish" : "Xodim qo'shish",
-      width: '50vw',
+      width: '80vw',
       contentStyle: { overflow: 'auto' },
       breakpoints: {
         '960px': '75vw',

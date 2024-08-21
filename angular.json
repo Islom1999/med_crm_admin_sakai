@@ -33,7 +33,10 @@
                             "src/styles.scss"
                         ],
                         "scripts": [],
-                        "allowedCommonJsDependencies": ["quill"]
+                        "allowedCommonJsDependencies": [
+                            "quill",
+                            "@ckeditor/ckeditor5-build-classic"
+                        ]
                     },
                     "configurations": {
                         "production": {

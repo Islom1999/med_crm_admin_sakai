@@ -188,7 +188,7 @@ export class AppMenuComponent implements OnInit {
                     { 
                         label: "Sozlamalar", 
                         icon: 'pi pi-fw pi-cog', 
-                        // routerLink: ['/'],
+                        routerLink: ['/files'],
                     },
                     { 
                         label: "Tashqi xizmatlar", 

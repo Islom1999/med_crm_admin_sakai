@@ -1,1 +1,48 @@
-<p>rooms-detail works!</p>
+<div class="grid p-fluid">
+    <div class="col-12">
+        <div class="card">
+            <ng-container *ngIf="$loading">
+                <p-skeleton height="5rem" styleClass="mb-2" />
+                <p-skeleton styleClass="mb-2" />
+                <p-skeleton height="5rem" styleClass="mb-2" />
+                <div class="flex justify-content-evenly mt-3">
+                    <p-skeleton styleClass="mb-2" width="15rem" height="2rem"/>
+                    <p-skeleton styleClass="mb-2" width="15rem" height="2rem"/> 
+                </div>
+            </ng-container>
+            
+            <ng-container *ngIf="!$loading">
+                <div class="flex align-items-center justify-content-center">
+                    <div class="col-12">
+                        <form [formGroup]="$form" (submit)="$submit()">
+                            <div class="p-fluid p-formgrid grid">
+                                <div *ngIf="this.type_id != 1" class="field col-12 md:col-12">
+                                    <label>parent</label>
+                                    <p-dropdown 
+                                        [options]="rooms" 
+                                        optionLabel="room_name" 
+                                        optionValue="id" 
+                                        formControlName="parent_id" 
+                                        [filter]="true"
+                                        [showClear]="true"
+                                    ></p-dropdown>
+                                </div>
+                                <div class="field col-12 md:col-12">
+                                    <label>nomi</label>
+                                    <input 
+                                        pInputText
+                                        formControlName="room_name" 
+                                    />
+                                </div>
+                            </div>
+                            <div class="mt-5 flex gap-3">
+                                <button type="button" pButton [label]="'qaytish'" class="text-center p-button-secondary" (click)="$back()"></button>
+                                <button pButton [label]="$id ? 'o\'zgartirish' : 'qo\'shish'" class="text-center" [disabled]="$disableBtn"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

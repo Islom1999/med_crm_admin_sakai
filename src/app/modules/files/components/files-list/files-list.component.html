@@ -1,15 +1,15 @@
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <h5>Hodimlar ro'yhati</h5>
-            <p-table #dt1 [value]="$data | async" dataKey="id" [rows]="10" [loading]="$loading | async" [rowHover]="true"
+            <h5>Fayllar ro'yhati</h5>
+            <p-table #dt1 [value]="data | async" dataKey="id" [rows]="10" [loading]="loading | async" [rowHover]="true"
                 styleClass="p-datatable-gridlines" [paginator]="true"
-                [globalFilterFields]="['fullname','mobile','email']" responsiveLayout="scroll">
+                [globalFilterFields]="['id','files_by','files_type']" responsiveLayout="scroll">
                 <ng-template pTemplate="caption">
                     <div class="flex justify-content-between flex-column sm:flex-row">
                         <span class="p-input-icon-left mb-2">
                             <i class="pi pi-search"></i>
-                            <input pInputText type="text" #filter (input)="$onGlobalFilter(dt1, $event)"
+                            <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, event)"
                                 placeholder="izlash ..." class="w-full" />
                         </span>
                         <button *ngxPermissionsOnly="['super']" (click)="showUpdateModal()" pButton pRipple type="button" icon="pi pi-plus-circle" class="p-button-info"></button>
@@ -20,27 +20,17 @@
                     <tr>
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
-                                Ism familiyasi
+                                Fayl
                             </div>
                         </th>
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
-                                jinsi
+                                nomi
                             </div>
                         </th>
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
-                                millati
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                address
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                mobile raqami
+                                turi
                             </div>
                         </th>
                         <th style="min-width: 12rem">
@@ -64,52 +54,67 @@
                 <ng-template pTemplate="body" let-data_item>
                     <tr>
                         <td>
-                            {{data_item.fullname}}
+                            <p-image 
+                                *ngIf="data_item.files_type == 'image'"
+                                [src]="getView(data_item.id)" 
+                                alt="Image"
+                                width="250"
+                                [preview]="true" 
+                            />
+                            <img 
+                                *ngIf="data_item.files_type == 'video'"
+                                [src]="'https://cdn-icons-png.flaticon.com/512/4404/4404094.png'" 
+                                alt="video"
+                                width="250"
+                                [preview]="true" 
+                            />
+                            <img 
+                                *ngIf="data_item.files_type == 'docs'"
+                                [src]="'https://png.pngtree.com/png-vector/20190406/ourmid/pngtree-doc-file-document-icon-png-image_913809.jpg'" 
+                                alt="video"
+                                width="250"
+                                [preview]="true" 
+                            />
+                            
                         </td>
                         <td>
-                            <span [class]="'customer-badge status-proposal mx-1'">{{data_item.gender}}</span>
+                            <p-tag class="customer-badge"  value="{{data_item.files_by}}"/>
                         </td>
                         <td>
-                            {{data_item.nationality}}
-                        </td>
-                        <td>
-                            {{ data_item.address }}
-                        </td>
-                        <td>
-                            {{ data_item.phone }}
+                            <p-tag class="customer-badge" severity="info" value="{{data_item.files_type}}"/>
                         </td>
                         <td>
                             <span [class]="'customer-badge status-' + (data_item.state == 1 ? 'qualified':'unqualified')">{{data_item.state == 1 ? 'active':"deleted"}}</span>
                         </td>
                         <td>
-                            {{data_item.updated_id}} ta o'zgartirilgan
+                            {{data_item.size}} mb
                         </td>
                         <td class="table-action">
                             <span class="p-buttonset">
                                 <ng-container *ngxPermissionsOnly="['super']">
-                                    <button *ngIf="data_item.state == 1" (click)="showUpdateModal(data_item.id)" pButton icon="pi pi-pencil" class="p-button-info"></button>
+                                    <button *ngIf="data_item.state == 1" (click)="showInfoModal(data_item.id)" pButton icon="pi pi-file" class="p-button-info"></button>
                                 </ng-container>
                                 <ng-container *ngxPermissionsOnly="['super']">
-                                    <button *ngIf="data_item.state == 1" (click)="$delete(data_item.id)" pButton icon="pi pi-trash" class="p-button-danger"></button>
+                                    <button *ngIf="data_item.state == 1" (click)="delete(data_item.id)" pButton icon="pi pi-trash" class="p-button-danger"></button>
                                 </ng-container>
                                 <ng-container *ngxPermissionsOnly="['super']">
-                                    <button *ngIf="data_item.state == 0" (click)="$repair(data_item.id)" pButton icon="pi pi pi-refresh" class="p-button-warning"></button>
+                                    <button *ngIf="data_item.state == 0" (click)="repair(data_item.id)" pButton icon="pi pi pi-refresh" class="p-button-warning"></button>
                                 </ng-container>
                             </span>
                         </td>
                     </tr>
                 </ng-template>
+
                 <ng-template pTemplate="emptymessage">
                     <tr>
-                        <td colspan="8">Malumot yo'q</td>
+                        <td colspan="8">
+                            Ma'lumotlar yo'q
+                        </td>
                     </tr>
                 </ng-template>
+
                 <ng-template pTemplate="loadingbody">
                     <tr>
-                        <td><p-skeleton /></td>
-                        <td><p-skeleton /></td>
-                        <td><p-skeleton /></td>
-                        <td><p-skeleton /></td>
                         <td><p-skeleton /></td>
                         <td><p-skeleton /></td>
                         <td><p-skeleton /></td>
@@ -120,3 +125,27 @@
         </div>
     </div>
 </div>
+
+
+<!-- <div class="card">
+    <div class="card flex flex-wrap gap-2 justify-content-center">
+            <p-card *ngFor="let item of data | async" class="col-2">
+                <ng-template pTemplate="header">
+                    <ng-container *ngIf="item.files_type == 'image'">
+                        <p-image [src]="getView(item.id)" alt="Image"
+                            [preview]="true" />
+                    </ng-container>
+                </ng-template>
+
+                <p>files_type: {{item.files_type}}</p>
+                <p>files_by: {{item.files_by}}</p>
+                <p>size: {{item.size}} mb</p>
+
+                <div class="flex gap-3 mt-1">
+                    <p-button *ngIf="item.state == 1" (click)="repair(item.id)" icon="pi pi-pencil" severity="primary" class="w-full btn-sm" styleClass="w-full" /> 
+                    <p-button *ngIf="item.state == 1" (click)="delete(item.id)" icon="pi pi-trash" severity="danger" class="w-full btn-sm" styleClass="w-full" />
+                    <p-button *ngIf="item.state == 0" (click)="repair(item.id)" icon="pi pi-refresh" severity="warning" class="w-full btn-sm" styleClass="w-full" /> 
+                </div>
+            </p-card>
+    </div>
+</div> -->

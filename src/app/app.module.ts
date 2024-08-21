@@ -19,6 +19,7 @@ import { AuthInterceptor, CustomCurrencyPipe, ErrorInterceptor } from './shared'
 import { registerLocaleData } from '@angular/common';
 import localeTr from '@angular/common/locales/tr';
 import { BaseModule } from './base';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 registerLocaleData(localeTr, 'tr');
 
@@ -31,13 +32,15 @@ registerLocaleData(localeTr, 'tr');
     imports: [
         AppRoutingModule, 
         AppLayoutModule,
-
         HttpClientModule,
-
+        FormsModule,
+        ReactiveFormsModule,
         NgxPermissionsModule.forRoot(),
 
         ToastModule,
         BaseModule,
+        
+        
     ],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },

@@ -1,0 +1,27 @@
+<div class="card">
+    <div class="flex justify-content-center">
+        <p-image 
+            *ngIf="data?.files_type == 'image'"
+            [src]="getView(data?.id)" 
+            alt="Image"
+            width="250"
+            [preview]="true" 
+        />
+        <video 
+            *ngIf="data?.files_type == 'video'"
+            [src]="getView(data?.id)" 
+            style="width: 250px; height: auto;"
+            controls 
+        >
+        </video>
+
+
+
+        <ngx-doc-viewer 
+            *ngIf="data?.files_type == 'docs'"
+            [url]="getView(data?.id)" 
+            style="width: 100%; height: 500px;"
+        ></ngx-doc-viewer>
+
+    </div>
+</div>
