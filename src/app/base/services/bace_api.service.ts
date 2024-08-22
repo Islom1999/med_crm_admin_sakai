@@ -13,13 +13,16 @@ export abstract class BaseApiService<T> {
   private _loadingSubject = new BehaviorSubject<Boolean>(true);
   readonly _data: Observable<T[]> = this._dataSubject.asObservable();
   readonly _loading: Observable<Boolean> = this._loadingSubject.asObservable()
+  private _paramsSubject = new BehaviorSubject<HttpParams>(new HttpParams());
+  readonly _params: Observable<HttpParams> = this._paramsSubject.asObservable();
+  // _params:HttpParams = new HttpParams()
 
-  constructor(protected http: HttpClient, protected apiUrl: string, protected params?:HttpParams) {
+  constructor(protected http: HttpClient, protected apiUrl: string) {
     this.loadAll()
   }
 
-  loadAll(params?: HttpParams) {
-    this.http.get<T[]>(`${this.apiUrl}`, { params })
+  loadAll() {
+    this.http.get<T[]>(`${this.apiUrl}`, { params: this._paramsSubject.value })
       .pipe(
         tap(data => {
           this._dataSubject.next(data);
@@ -28,6 +31,17 @@ export abstract class BaseApiService<T> {
       )
       .subscribe(); 
   }
+
+  updateParams(params: HttpParams) {
+    this._paramsSubject.next(params);
+    this.loadAll();
+  }
+
+  getParams(): HttpParams {
+    return this._paramsSubject.value;
+  }
+
+
 
   // @Cacheable()
   getAll(params?: HttpParams): Observable<T[]> {
@@ -41,7 +55,7 @@ export abstract class BaseApiService<T> {
     });
   }
 
-  @Cacheable()
+  // @Cacheable()
   getById(id: string | undefined): Observable<T> {
     if(!id) return of()
     return this.http.get<T>(`${this.apiUrl}/${id}`);
@@ -50,7 +64,7 @@ export abstract class BaseApiService<T> {
   create(data: T): Observable<T> {
     return this.http.post<T>(`${this.apiUrl}`, data).pipe(
       tap(() => {
-        this.loadAll(this.params)
+        this.loadAll()
       })
     );
   }
@@ -58,7 +72,7 @@ export abstract class BaseApiService<T> {
   update(id: string, data: T): Observable<T> {
     return this.http.patch<T>(`${this.apiUrl}/${id}`, data).pipe(
       tap(() => {
-        this.loadAll(this.params)
+        this.loadAll()
       }),
     );
   }
@@ -66,7 +80,7 @@ export abstract class BaseApiService<T> {
   delete(id: string): Observable<T> {
     return this.http.delete<T>(`${this.apiUrl}/${id}`).pipe(
       tap(() => {
-        this.loadAll(this.params)
+        this.loadAll()
       }),
     );
   }
@@ -74,7 +88,7 @@ export abstract class BaseApiService<T> {
   repair(id: string): Observable<T> {
     return this.http.post<T>(`${this.apiUrl}/repair/${id}`, {}).pipe(
       tap(() => {
-        this.loadAll(this.params)
+        this.loadAll()
       }),
     );
   }

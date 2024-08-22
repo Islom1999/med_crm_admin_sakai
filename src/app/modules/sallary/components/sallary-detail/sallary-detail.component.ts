@@ -35,7 +35,7 @@ export class SallaryDetailComponent extends BaseDetailComponentList<ISallary>{
     // forma elementlari
     this.$form = new FormGroup({
       salary_type: new FormControl('', [Validators.required]),
-      amount: new FormControl('', [Validators.required]),
+      price: new FormControl('', [Validators.required]),
       percentage: new FormControl('', [Validators.required]),
       date: new FormControl(new Date(), [Validators.required]),
       staff_id: new FormControl('', [Validators.required]),

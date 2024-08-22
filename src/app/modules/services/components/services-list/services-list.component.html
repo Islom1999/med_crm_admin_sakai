@@ -6,13 +6,27 @@
                 styleClass="p-datatable-gridlines" [paginator]="true"
                 [globalFilterFields]="['name','permissions','state']" responsiveLayout="scroll">
                 <ng-template pTemplate="caption">
-                    <div class="flex justify-content-between flex-column sm:flex-row">
-                        <span class="p-input-icon-left mb-2">
-                            <i class="pi pi-search"></i>
-                            <input pInputText type="text" #filter (input)="$onGlobalFilter(dt1, $event)"
-                                placeholder="izlash ..." class="w-full" />
-                        </span>
-                        <button *ngxPermissionsOnly="['super']" (click)="showUpdateModal()" pButton pRipple type="button" icon="pi pi-plus-circle" class="p-button-info"></button>
+                    <div class="flex justify-content-between align-items-center flex-column sm:flex-row">
+                        <div class="field col-3">
+                            <p-dropdown 
+                                [options]="type" 
+                                formControlName="type" 
+                                [showClear]="true"
+                                [readonly]="select_type ? true : false"
+                            ></p-dropdown>
+                        </div>
+
+                        <div class="field col-3">
+                            <span class="p-input-icon-left mb-2">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" #filter (input)="$onGlobalFilter(dt1, $event)"
+                                    placeholder="izlash ..." class="w-full" />
+                            </span>
+                        </div>
+                        
+                        <div class="field">
+                            <button *ngxPermissionsOnly="['super']" (click)="showUpdateModal('doctor')" pButton pRipple type="button" icon="pi pi-plus-circle" class="p-button-info"></button>
+                        </div>
                     </div>
                 </ng-template>
 
@@ -76,7 +90,7 @@
                             {{data_item.duration}} minut
                         </td>
                         <td>
-                            {{ data_item.amount | customCurrency }}
+                            {{ getLatestValidPrice(data_item) | customCurrency }}
                         </td>
                         <td>
                             <span [class]="'customer-badge status-' + (data_item.state == 1 ? 'qualified':'unqualified')">{{data_item.state == 1 ? 'active':"deleted"}}</span>
@@ -87,7 +101,7 @@
                         <td class="table-action">
                             <span class="p-buttonset">
                                 <ng-container *ngxPermissionsOnly="['super']">
-                                    <button *ngIf="data_item.state == 1" (click)="showUpdateModal(data_item.id)" pButton icon="pi pi-pencil" class="p-button-info"></button>
+                                    <button *ngIf="data_item.state == 1" (click)="showUpdateModal('doctor', data_item.id)" pButton icon="pi pi-pencil" class="p-button-info"></button>
                                 </ng-container>
                                 <ng-container *ngxPermissionsOnly="['super']">
                                     <button *ngIf="data_item.state == 1" (click)="$delete(data_item.id)" pButton icon="pi pi-trash" class="p-button-danger"></button>

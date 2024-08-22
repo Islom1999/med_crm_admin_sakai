@@ -23,7 +23,6 @@
                                         optionLabel="room_name" 
                                         optionValue="id" 
                                         formControlName="parent_id" 
-                                        [filter]="true"
                                         [showClear]="true"
                                     ></p-dropdown>
                                 </div>
@@ -33,6 +32,16 @@
                                         pInputText
                                         formControlName="room_name" 
                                     />
+                                </div>
+                                <div class="field col-12 md:col-12">
+                                    <label>statusi</label>
+                                    <p-dropdown 
+                                        [options]="ocupied" 
+                                        optionLabel="name" 
+                                        optionValue="value" 
+                                        formControlName="is_occupied" 
+                                        [showClear]="true"
+                                    ></p-dropdown>
                                 </div>
                             </div>
                             <div class="mt-5 flex gap-3">

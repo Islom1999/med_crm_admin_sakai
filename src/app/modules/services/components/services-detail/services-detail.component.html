@@ -26,9 +26,10 @@
                                         [options]="type" 
                                         formControlName="type" 
                                         [showClear]="true"
+                                        [readonly]="select_type ? true : false"
                                     ></p-dropdown>
                                 </div>
-                                <div class="field col-12 md:col-6">
+                                <div *ngIf="isType('doctor')" class="field col-12 md:col-6">
                                     <label>hodim</label>
                                     <p-dropdown 
                                         [options]="staff" 
@@ -39,15 +40,27 @@
                                         [showClear]="true"
                                     ></p-dropdown>
                                 </div>
+                                <div *ngIf="isType('room')" class="field col-12 md:col-6">
+                                    <label>xona</label>
+                                    <p-dropdown 
+                                        [options]="room" 
+                                        optionLabel="room_name" 
+                                        optionValue="id" 
+                                        formControlName="room_id" 
+                                        [filter]="true"
+                                        [showClear]="true"
+                                        [readonly]="true"
+                                    ></p-dropdown>
+                                </div>
                                 <div class="field col-12 md:col-6">
-                                    <label>interval vaqti</label>
+                                    <label>xizmat vaqti</label>
                                     <p-inputNumber 
                                         formControlName="duration" 
                                         mode="decimal" 
-                                        suffix=" minut"
+                                        [suffix]="isType('room') ? ' kun' : isType('doctor') ? ' minut' : ' minut'"
                                         [showButtons]="true" 
                                         [min]="0" [max]="120"
-                                        [step]="5" 
+                                        [step]="isType('room') ? 1 : isType('doctor') ? 5 : 5" 
                                         [useGrouping]="false"
                                     >
                                     </p-inputNumber>
@@ -55,7 +68,7 @@
                                 <div class="field col-12 md:col-6">
                                     <label>narxi</label>
                                     <p-inputNumber 
-                                        formControlName="amount" 
+                                        formControlName="price" 
                                         mode="currency"
                                         currency="UZS" 
                                         locale="de-DE"

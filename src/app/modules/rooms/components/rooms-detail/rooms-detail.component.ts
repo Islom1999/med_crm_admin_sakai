@@ -17,6 +17,11 @@ export class RoomsDetailComponent extends BaseDetailComponentList<IRoom> {
   type_id!:number
   parent_id!:string
 
+  ocupied = [
+    {name: "Bo'sh", value: false},
+    {name: "Band", value: true}
+  ]
+
   constructor(
     private baseSrv: RoomsService,
     private messageService: MessageService,

@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { BaseApiService } from '../services/bace_api.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   template:'',
@@ -15,6 +16,7 @@ export abstract class BaseComponentList<T> implements OnInit {
   $loading: Observable<Boolean> = this.$baseSrv._loading.pipe()
   $data: Observable<T[]> = this.$baseSrv._data.pipe()
   $ref: DynamicDialogRef | undefined;
+  $params:HttpParams = new HttpParams();
 
   constructor(
     protected $baseSrv: BaseApiService<T>,
@@ -28,10 +30,15 @@ export abstract class BaseComponentList<T> implements OnInit {
     // this.$permission.getPermisssion().subscribe(permission => {
     //   this.$permissionSrv.loadPermissions(permission);
     // })
+    this.$loadData()
   }
 
   $onGlobalFilter(table: Table, event: Event) {
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  $loadData() {
+    this.$baseSrv.loadAll()
   }
 
   $delete(id: string | undefined): void {

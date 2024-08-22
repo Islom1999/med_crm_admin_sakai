@@ -5,9 +5,14 @@
                 <h5>Row Expand</h5>
                 <p-table [value]="$data | async" dataKey="id" responsiveLayout="scroll">
                     <ng-template pTemplate="caption">
-                        <ng-container *ngxPermissionsOnly="['super']">
-                            <button (click)="showUpdateModal(1)" pButton icon="pi pi-plus-circle" class="p-button-primary"></button>
-                        </ng-container>
+                        <div class="flex justify-content-between">
+                            <ng-container>
+                                <button (click)="$loadData()" pButton icon="pi pi-sync" class="p-button-help"></button>
+                            </ng-container>
+                            <ng-container *ngxPermissionsOnly="['super']">
+                                <button (click)="showUpdateModal(1)" pButton icon="pi pi-plus-circle" class="p-button-primary"></button>
+                            </ng-container>
+                        </div>
                         <div class="flex table-header">
                         </div>
                     </ng-template>
@@ -30,7 +35,7 @@
                             </td>
                             <td style="min-width: 12rem;">{{data_item.room_name}}</td>
                             <td style="min-width: 10rem;">
-                                <span [class]="'customer-badge status-proposal mx-1'">{{data_item.is_occupied ? "Band" : "Bo'sh"}}</span>
+                                <span [class]="'customer-badge mx-1 status-' + (data_item.is_occupied ? 'unqualified' : 'proposal')">{{data_item.is_occupied ? "Band" : "Bo'sh"}}</span>
                             </td>
                             <td>
                                 <span [class]="'customer-badge status-' + (data_item.state == 1 ? 'qualified':'unqualified')">{{data_item.state == 1 ? 'active':"deleted"}}</span>
@@ -66,6 +71,7 @@
                                                 <!-- <th style="width: 3rem"></th> -->
                                                 <th pSortableColumn="name">Nomi <p-sortIcon field="name"></p-sortIcon></th>
                                                 <th pSortableColumn="price">statusi<p-sortIcon field="price"></p-sortIcon></th>
+                                                <th pSortableColumn="price">narxi<p-sortIcon field="price"></p-sortIcon></th>
                                                 <th pSortableColumn="category">holati<p-sortIcon field="category"></p-sortIcon></th>
                                                 <th pSortableColumn="rating">o'zgartirilgan<p-sortIcon field="rating"></p-sortIcon></th>
                                                 <th pSortableColumn="rating">boshqarish</th>
@@ -82,6 +88,7 @@
                                                 <td style="min-width: 10rem;">
                                                     <span [class]="'customer-badge status-proposal mx-1'">{{item.is_occupied ? "Band" : "Bo'sh"}}</span>
                                                 </td>
+                                                <td style="min-width: 12rem;">{{getLatestValidPrice(item)}}</td>
                                                 <td>
                                                     <span [class]="'customer-badge status-' + (item.state == 1 ? 'qualified':'unqualified')">{{item.state == 1 ? 'active':"deleted"}}</span>
                                                 </td>
@@ -90,9 +97,9 @@
                                                 </td>
                                                 <td class="table-action">
                                                     <span class="p-buttonset">
-                                                        <!-- <ng-container *ngxPermissionsOnly="['super']">
-                                                            <button *ngIf="data_item.state == 1" (click)="showUpdateModal(3, item.id)" pButton icon="pi pi-plus-circle" class="p-button-primary"></button>
-                                                        </ng-container> -->
+                                                        <ng-container *ngxPermissionsOnly="['super']">
+                                                            <button *ngIf="item.state == 1" (click)="showServiceModal('room', item.id, getLatestValidService(item)?.id)" pButton icon="pi pi-wallet" class="p-button-warning"></button>
+                                                        </ng-container>
                                                         <ng-container *ngxPermissionsOnly="['super']">
                                                             <button *ngIf="item.state == 1" (click)="showUpdateModal(2, data_item.id, item.id)" pButton icon="pi pi-pencil" class="p-button-info"></button>
                                                         </ng-container>
