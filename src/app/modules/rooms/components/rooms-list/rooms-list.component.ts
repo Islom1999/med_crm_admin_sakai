@@ -9,6 +9,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { PermissionService } from 'src/app/shared';
 import { Table } from 'primeng/table';
 import { ServicesDetailComponent } from 'src/app/modules/services/components';
+import { ActivatedRoute } from '@angular/router';
 
 interface expandedRows {
   [key: string]: boolean;
@@ -28,15 +29,24 @@ interface Column {
 export class RoomsListComponent extends BaseComponentList<IRoom> {
   expandedRows: expandedRows = {};
   isExpanded: boolean = false;
+  is_occupied!: boolean;
 
   constructor(
     baseSrv: RoomsService,
     permission: PermissionService,
     permissionSrv: NgxPermissionsService,
     messageService: MessageService,
-    dialogService: DialogService
+    dialogService: DialogService,
+    private route: ActivatedRoute,
   ) {
     super(baseSrv, permission, permissionSrv, messageService, dialogService);
+  }
+
+  override ngOnInit(): void {
+    this.is_occupied = this.route.snapshot.data['is_occupied'];
+    this.$params = this.$baseSrv.getParams().set('is_occupied', this.is_occupied);
+    this.$baseSrv.updateParams(this.$params);
+    super.ngOnInit()
   }
 
   showUpdateModal(type_id:number, parent_id?:string, id?:string,) {
@@ -53,9 +63,6 @@ export class RoomsListComponent extends BaseComponentList<IRoom> {
   }
 
   showServiceModal(type:string, room_id?:string, id?:string) {
-    
-    console.log({type, room_id, id})
-
     this.$ref = this.$dialogService.open(ServicesDetailComponent, {
       header: id ? "Xizmatni o'zgartirish" : "Xizmat qo'shish",
       width: '50vw',
@@ -66,10 +73,6 @@ export class RoomsListComponent extends BaseComponentList<IRoom> {
       },
       data:{id, type, room_id}
     });
-  }
-
-  override ngOnInit(): void {
-    super.ngOnInit()
   }
 
   getLatestValidService(dataItem: IRoom): IServices | null {

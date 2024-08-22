@@ -17,12 +17,16 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
   type: any[] = Object.values(StaffType);
   gender: any[] = Object.values(Gender);
   imageSrc: string | null = 'assets/layout/images/avatar.jpg';
+  is_disable=false
+
+  type_check = [{label: "Passport ma'lumotlar", value: true},{label: "Qo'lda kiritish", value: false}]
 
   constructor(
     private baseSrv: PatientService,
     private messageService: MessageService,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
+    private cdr: ChangeDetectorRef
   ) {
     super(baseSrv, messageService, config, ref)
   }
@@ -108,10 +112,6 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
                   pinfl: userData.pinfl,
                   gender: userData.gender,
                 })
-                this.$form.get('series_document')?.disable();
-                this.$form.get('date_of_birth')?.disable();
-                this.$form.get('pinfl')?.disable();
-                // this.$form.get('gender')?.disable();
   
                 this.baseSrv.getUserDataImage(userData.pinfl.toString(), formattedDateOfBirth).subscribe((data) => {
                   this.imageSrc = `data:${data.contentType};base64,${data.photo}`;
@@ -157,5 +157,10 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
           }
         });
       }
+  }
+
+  changeTypeCheck(value:boolean){
+    this.is_disable = value
+    this.cdr.detectChanges()
   }
 }

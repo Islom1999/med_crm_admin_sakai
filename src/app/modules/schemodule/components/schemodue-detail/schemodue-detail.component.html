@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <form [formGroup]="$form" (submit)="$submit()">
                             <div class="p-fluid p-formgrid grid">
-                                <div class="field col-12 md:col-12">
+                                <div [class]="'field col-12 md:col-' + (isType('weeks') ? '12':'6')">
                                     <label>hodim</label>
                                     <p-dropdown 
                                         [options]="staff" 
@@ -33,9 +33,10 @@
                                         [options]="type" 
                                         formControlName="schemodule_type" 
                                         [showClear]="true"
+                                        [readonly]="true"
                                     ></p-dropdown>
                                 </div>
-                                <div class="field col-12 md:col-6">
+                                <div *ngIf="isType('weeks')" class="field col-12 md:col-6">
                                     <label>havta kuni</label>
                                     <p-dropdown 
                                         [options]="weeks" 
@@ -51,7 +52,7 @@
                                     <p-calendar 
                                         formControlName="start_time"
                                         [showIcon]="true" 
-                                        [timeOnly]="true">
+                                        [timeOnly]="isType('weeks') ? true : false">
                                     </p-calendar>
                                 </div>
                                 <div class="field col-12 md:col-6">
@@ -59,7 +60,7 @@
                                     <p-calendar 
                                         formControlName="end_time"
                                         [showIcon]="true" 
-                                        [timeOnly]="true">
+                                        [timeOnly]="isType('weeks') ? true : false">
                                     </p-calendar>
                                 </div>
                                 <div class="field col-12 md:col-12">

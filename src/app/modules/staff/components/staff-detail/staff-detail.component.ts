@@ -27,7 +27,10 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
   role!: IRole[]
   department!: IDepartament[]
   imageSrc: string | null = 'assets/layout/images/avatar.jpg';
+  is_disable=false
 
+  type_check = [{label: "Passport ma'lumotlar", value: true},{label: "Qo'lda kiritish", value: false}]
+  
   constructor(
     private baseSrv: StaffService,
     private roleSrv: RoleService,
@@ -35,7 +38,8 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
     private messageService: MessageService,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
-    private prime_config: PrimeNGConfig
+    private prime_config: PrimeNGConfig,
+    private cdr: ChangeDetectorRef
   ) {
     super(baseSrv, messageService, config, ref)
   }
@@ -93,8 +97,6 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
       const seriesDocument = this.$form.get('series_document')?.value;
       const dateOfBirthControl = this.$form.get('date_of_birth');
 
-      console.log(dateOfBirthControl.value)
-
       if (seriesDocument && dateOfBirthControl && dateOfBirthControl.value) {
         // Maskadagi qiymatni katta harflarga o'tkazish
         const cleanedSeriesDocument = seriesDocument.replace(/[()\s]/g, '').toUpperCase();
@@ -103,6 +105,8 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
         const number = parseInt(cleanedSeriesDocument.substring(2)); // Qolgan raqamlar (4774828)
 
         const dateOfBirth = dateOfBirthControl.value;
+
+        if(!this.is_disable) return
 
         let formattedDateOfBirth;
         if (typeof dateOfBirth === 'string') {
@@ -134,14 +138,9 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
                   fullname: userData.fullname,
                   address: userData.address,
                   nationality: userData.nationality,
-                  pinfl: userData.pinfl,
+                  pinfl: userData.pinfl.toString(),
                   gender: userData.gender,
                 })
-                this.$form.get('series_document')?.disable();
-                this.$form.get('date_of_birth')?.disable();
-                this.$form.get('pinfl')?.disable();
-                this.$form.get('gender')?.disable();
-
                 this.baseSrv.getUserDataImage(userData.pinfl.toString(), formattedDateOfBirth).subscribe((data) => {
                   this.imageSrc = `data:${data.contentType};base64,${data.photo}`;
                 })
@@ -153,6 +152,7 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
       } else {
         // console.log('Sana yoki passport seriasi to\'ldirilmagan.');
       }
+      this.cdr.detectChanges()
     } catch (error) {
 
     }
@@ -189,5 +189,10 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
   // File Upload
   onBasicUploadAuto(event: UploadEvent) {
     // this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
+  }
+
+  changeTypeCheck(value:boolean){
+    this.is_disable = value
+    this.cdr.detectChanges()
   }
 }

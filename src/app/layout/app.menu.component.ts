@@ -77,12 +77,12 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: "Ish vaqtlari", 
                                 icon: 'pi pi-fw pi-calendar-plus', 
-                                routerLink: ['/schemodule'],
+                                routerLink: ['/schemodule/weeks'],
                             },
                             {
                                 label: "Bayramlar", 
                                 icon: 'pi pi-fw pi-calendar-minus', 
-                                // routerLink: ['/'],
+                                routerLink: ['/schemodule/holiday'],
                             }
                         ] 
                     },
@@ -146,12 +146,12 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: "Bo'sh xonalar", 
                                 icon: 'pi pi-fw pi-lock-open', 
-                                // routerLink: ['/'],
+                                routerLink: ['/rooms/empty'],
                             },
                             {
                                 label: "Band xonalar", 
                                 icon: 'pi pi-fw pi-unlock', 
-                                // routerLink: ['/'],
+                                routerLink: ['/rooms/occupied'],
                             }
                         ] 
                     }

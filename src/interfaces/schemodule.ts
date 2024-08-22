@@ -1,5 +1,6 @@
 import { SchemoduleType } from "src/enumerations";
 import { IBase } from "./base_interface";
+import { IStaff } from "./staff";
 
 export interface ISchemodule extends IBase{
     notes:           string;
@@ -8,4 +9,6 @@ export interface ISchemodule extends IBase{
     start_time:      Date;
     end_time:        Date;
     staff_id:        string;
+
+    staff: IStaff
 } 

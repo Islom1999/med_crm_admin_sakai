@@ -6,6 +6,9 @@ import { canActivatePermission } from 'src/app/shared';
 import { BaseModule } from 'src/app/base';
 import { PasswordModule } from 'primeng/password';
 import { FileUploadModule } from 'primeng/fileupload';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { FormsModule } from '@angular/forms';
+
 
 const routes: Routes = [
   {
@@ -29,6 +32,9 @@ const routes: Routes = [
 
     PasswordModule,
     FileUploadModule,
+    SelectButtonModule,
+
+    FormsModule,
   ]
 })
 export class StaffModule { }

@@ -12,6 +12,18 @@ const routes: Routes = [
     component: RoomsListComponent,
     canActivate: [canActivatePermission],
     data: { permissions: ['super'] },
+  },
+  {
+    path: 'empty',
+    component: RoomsListComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['super'], is_occupied: false },
+  },
+  {
+    path: 'occupied',
+    component: RoomsListComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['super'], is_occupied: true },
   }
 ];
 

@@ -7,10 +7,16 @@ import { BaseModule } from 'src/app/base';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'holiday',
     component: SchemodueListComponent,
     canActivate: [canActivatePermission],
-    data: { permissions: ['super'] },
+    data: { permissions: ['super'], type: 'holiday' },
+  },
+  {
+    path: 'weeks',
+    component: SchemodueListComponent,
+    canActivate: [canActivatePermission],
+    data: { permissions: ['super'], type: 'weeks' },
   }
 ];
 

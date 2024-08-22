@@ -7,6 +7,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PermissionService } from 'src/app/shared';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-schemodue-list',
@@ -15,17 +16,27 @@ import { PermissionService } from 'src/app/shared';
   providers: [DialogService]
 })
 export class SchemodueListComponent extends BaseComponentList<ISchemodule>{
+  type?:string
+
   constructor(
     baseSrv: SchemodueService,
     permission: PermissionService,
     permissionSrv: NgxPermissionsService,
     messageService: MessageService,
-    dialogService: DialogService
+    dialogService: DialogService,
+    private route: ActivatedRoute
   ) {
     super(baseSrv, permission, permissionSrv, messageService, dialogService);
   }
 
-  showUpdateModal(id?:string) {
+  override ngOnInit(): void {
+    this.type = this.route.snapshot.data['type'];
+    this.$params = this.$baseSrv.getParams().set('schemodule_type', this.type);
+    this.$baseSrv.updateParams(this.$params);
+    super.ngOnInit()
+  }
+  
+  showUpdateModal(select_type:string, id?:string) {
     this.$ref = this.$dialogService.open(SchemodueDetailComponent, {
       header: id ? "Ish vaqtini o'zgartirish" : "Ish vaqti qo'shish",
       width: '50vw',
@@ -34,7 +45,11 @@ export class SchemodueListComponent extends BaseComponentList<ISchemodule>{
         '960px': '75vw',
         '640px': '90vw'
       },
-      data:{id}
+      data:{id, select_type}
     });
+  }
+
+  isType(type:string){
+    return type == this.type
   }
 }

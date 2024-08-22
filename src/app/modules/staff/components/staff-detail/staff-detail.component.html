@@ -12,11 +12,19 @@
             </ng-container>
 
             <ng-container *ngIf="!$loading">
-
-                
-
                 <div class="flex align-items-center justify-content-center">
                     <div class="col-8">
+                        <div class="flex justify-content-center align-items-center mb-5">
+                            <div class="col-6">
+                                <p-selectButton 
+                                    [options]="type_check" 
+                                    optionLabel="label" 
+                                    optionValue="value"
+                                    [(ngModel)]="is_disable"
+                                    (ngModelChange)="changeTypeCheck($event)"
+                                />
+                            </div>
+                        </div>
                         <form [formGroup]="$form" (submit)="$submit()">
                             <div class="p-fluid p-formgrid grid">
                                 <div class="field col-12 md:col-3">
@@ -31,12 +39,16 @@
                                 <div class="field col-12 md:col-3">
                                     <label>tug'ilgan sanasi</label>
                                     <p-calendar type="date" dateFormat="dd.mm.yy" formControlName="date_of_birth"
-                                        [showIcon]="true" (change)="setPerson()" />
+                                        [showIcon]="true" (change)="setPerson()"/>
                                 </div>
                                 <div class="field col-12 md:col-3">
                                     <label>pinfil</label>
-                                    <input formControlName="pinfl" pInputText type="text"
-                                        class="">
+                                    <p-inputMask 
+                                        formControlName="pinfl" 
+                                        mask="99999999999999"
+                                        [readonly]="is_disable"
+                                    >
+                                    </p-inputMask>
                                 </div>
                                 <div class="field col-12 md:col-3">
                                     <label>jinsi</label>
@@ -44,23 +56,24 @@
                                         [options]="gender" 
                                         formControlName="gender" 
                                         [showClear]="true"
+                                        [readonly]="is_disable"
                                     ></p-dropdown>
                                 </div>
 
                                 <div class="field col-12 md:col-3">
                                     <label>millati</label>
                                     <input formControlName="nationality" pInputText type="text"
-                                        class="">
+                                        class="" [readonly]="is_disable">
                                 </div>
                                 <div class="field col-12 md:col-4">
                                     <label>fullname</label>
                                     <input formControlName="fullname" pInputText type="text"
-                                        class="">
+                                        class="" [readonly]="is_disable">
                                 </div>
                                 <div class="field col-12 md:col-5">
                                     <label>manzili</label>
                                     <input formControlName="address" pInputText type="email"
-                                        class="">
+                                        class="" [readonly]="is_disable">
                                 </div>
                                 <div class="field col-12 md:col-4">
                                     <label>bo'limi</label>
