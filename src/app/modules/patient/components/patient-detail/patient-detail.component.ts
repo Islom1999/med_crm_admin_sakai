@@ -1,12 +1,13 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { BaseDetailComponentList } from 'src/app/base';
-import { IPatient } from 'src/interfaces';
+import { IFiles, IPatient } from 'src/interfaces';
 import { PatientService } from '../../services';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { catchError, of } from 'rxjs';
 import { StaffType, Gender } from 'src/enumerations';
+import { FilesService } from 'src/app/modules/files/services';
 
 @Component({
   selector: 'app-patient-detail',
@@ -19,10 +20,13 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
   imageSrc: string | null = 'assets/layout/images/avatar.jpg';
   is_disable=false
 
+  uploadedFile!:IFiles;
+  is_uploaded = false;
   type_check = [{label: "Passport ma'lumotlar", value: true},{label: "Qo'lda kiritish", value: false}]
 
   constructor(
     private baseSrv: PatientService,
+    private filesService: FilesService,
     private messageService: MessageService,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
@@ -54,6 +58,10 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
           data.date_of_birth = new Date(data.date_of_birth);
         }
 
+        if(data.image){
+          this.imageSrc = this.filesService.getView(data.image)
+        }
+
         this.$form.patchValue(data);
 
         this.$disableBtn = false;
@@ -69,6 +77,8 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
     try {
       const seriesDocument = this.$form.get('series_document')?.value;
       const dateOfBirthControl = this.$form.get('date_of_birth');
+
+      if(!this.is_disable) return
   
       if (seriesDocument && dateOfBirthControl && dateOfBirthControl.value) {
         // Maskadagi qiymatni katta harflarga o'tkazish
@@ -101,6 +111,7 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
                     nationality: '',
                     pinfl: '',
                   })
+                  this.$messageService.add({ severity: 'error', summary: `Error ${error.code}`, detail: `Eror message: ${error.message}` })
                   return of();
                 })
               )
@@ -109,13 +120,14 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
                   fullname: userData.fullname,
                   address: userData.address,
                   nationality: userData.nationality,
-                  pinfl: userData.pinfl,
+                  pinfl: userData.pinfl.toString(),
                   gender: userData.gender,
                 })
   
                 this.baseSrv.getUserDataImage(userData.pinfl.toString(), formattedDateOfBirth).subscribe((data) => {
                   this.imageSrc = `data:${data.contentType};base64,${data.photo}`;
                 })
+                this.$messageService.add({ severity: 'success', summary: 'Success', detail: 'Data come' })
               });
           } catch (error) {
   
@@ -133,13 +145,18 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
     if (this.$form.valid) {
       let phone = this.$form.get('phone')?.value;
       let date_of_birth = this.$form.get('date_of_birth')?.value;
+      let image = this.uploadedFile?.id;
       
       if (phone) {
         const data = this.$form.value
-        phone = phone.replace(/[()\s-]/g, '');
+        phone = phone.toString().replace(/[()\s-]/g, '');
         data.phone = parseInt(phone, 10)
         data.date_of_birth = new Date(date_of_birth)
         data.gender = data.gender as Gender
+
+        if(image){
+          data.image = image
+        }
 
         this.$disableBtn = true;
         if (this.$id) {
@@ -162,5 +179,36 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
   changeTypeCheck(value:boolean){
     this.is_disable = value
     this.cdr.detectChanges()
+  }
+
+  // File Upload
+  onUpload(event: any, fileType: 'image', fileInput: any) {
+    for (let file of event.files) {
+      this.uploadFile(file, fileType, fileInput);
+    }
+  }
+
+  private uploadFile(file: File, fileType: 'image', fileInput: any) {
+    if (fileType === 'image') {
+      this.filesService.uploadImage(file).subscribe({
+        next: (response) => {
+          this.is_uploaded = true
+          this.uploadedFile = response
+          this.imageSrc = this.filesService.getView(this.uploadedFile.id)
+          fileInput.clear();
+
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: `${file.name} yuklandi.` });
+        },
+        error: (err) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: `Yuklanmadi ${file.name}.` });
+        }
+      });
+    } 
+  }
+
+  clearImage(){
+    this.is_uploaded = false
+    this.uploadedFile = null
+    this.imageSrc = 'assets/layout/images/avatar.jpg'
   }
 }

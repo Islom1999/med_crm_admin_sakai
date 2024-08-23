@@ -12,7 +12,7 @@ import { canActivatePermission } from './shared';
                 children: [
                     { 
                         path: '', 
-                        loadChildren: () => import('./modules').then(m => m.RoleModule), 
+                        loadChildren: () => import('./modules').then(m => m.DashboardModule), 
                         canActivate: [canActivatePermission],
                         data: { permissions: ['super'] }
                     },

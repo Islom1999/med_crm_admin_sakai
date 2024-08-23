@@ -8,6 +8,12 @@
         <i class="pi pi-bars"></i>
     </button>
 
+    <div class="flex justify-content-center align-items-center px-5 mx-5 gap-5">
+        <i class="pi pi-bell mr-4 p-text-secondary" pBadge style="font-size: 1.5rem" value="2"></i>
+        <i class="pi pi-calendar mr-4 p-text-secondary" pBadge style="font-size: 1.5rem" [value]="'10+'" severity="danger"></i>
+        <i class="pi pi-envelope p-text-secondary" pBadge style="font-size: 1.5rem" severity="danger"></i>
+    </div>
+
     <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
         <i class="pi pi-ellipsis-v"></i>
     </button>

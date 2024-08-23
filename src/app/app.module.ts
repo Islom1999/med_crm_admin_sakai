@@ -20,6 +20,9 @@ import { registerLocaleData } from '@angular/common';
 import localeTr from '@angular/common/locales/tr';
 import { BaseModule } from './base';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { BadgeModule } from 'primeng/badge';
 
 registerLocaleData(localeTr, 'tr');
 
@@ -39,8 +42,9 @@ registerLocaleData(localeTr, 'tr');
 
         ToastModule,
         BaseModule,
-        
-        
+        ButtonModule,
+        RippleModule,
+        BadgeModule
     ],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { BaseDetailComponentList } from 'src/app/base';
-import { IDepartament, IRole, IStaff } from 'src/interfaces';
+import { IDepartament, IFiles, IRole, IStaff } from 'src/interfaces';
 import { StaffService } from '../../services';
 import { Gender, StaffType } from 'src/enumerations';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -8,7 +8,8 @@ import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { RoleService } from 'src/app/modules/role/services';
 import { DepartamentService } from 'src/app/modules/departament/services';
-import { catchError, of } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
+import { FilesService } from 'src/app/modules/files/services';
 
 
 interface UploadEvent {
@@ -29,17 +30,20 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
   imageSrc: string | null = 'assets/layout/images/avatar.jpg';
   is_disable=false
 
+  uploadedFile!:IFiles;
+  is_uploaded = false;
   type_check = [{label: "Passport ma'lumotlar", value: true},{label: "Qo'lda kiritish", value: false}]
   
   constructor(
     private baseSrv: StaffService,
     private roleSrv: RoleService,
     private departamentSrv: DepartamentService,
+    private filesService: FilesService,
     private messageService: MessageService,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
     private prime_config: PrimeNGConfig,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
   ) {
     super(baseSrv, messageService, config, ref)
   }
@@ -61,7 +65,7 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
       nationality: new FormControl('', []),
       phone: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', []),
       address: new FormControl('', []),
       date_of_birth: new FormControl('', []),
       bio: new FormControl('', []),
@@ -76,6 +80,10 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
         // API'dan kelgan sana matnini Date obyektiga o'tkazish
         if (data.date_of_birth) {
           data.date_of_birth = new Date(data.date_of_birth);
+        }
+
+        if(data.image){
+          this.imageSrc = this.filesService.getView(data.image)
         }
 
         this.$form.patchValue(data);
@@ -130,6 +138,7 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
                     nationality: '',
                     pinfl: '',
                   })
+                  this.$messageService.add({ severity: 'error', summary: `Error ${error.code}`, detail: `Eror message: ${error.message}` })
                   return of();
                 })
               )
@@ -141,9 +150,11 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
                   pinfl: userData.pinfl.toString(),
                   gender: userData.gender,
                 })
+  
                 this.baseSrv.getUserDataImage(userData.pinfl.toString(), formattedDateOfBirth).subscribe((data) => {
                   this.imageSrc = `data:${data.contentType};base64,${data.photo}`;
                 })
+                this.$messageService.add({ severity: 'success', summary: 'Success', detail: 'Data come' })
               });
           } catch (error) {
 
@@ -161,11 +172,16 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
   override $submit(): void {
     if (this.$form.valid) {
       let phone = this.$form.get('phone')?.value;
+      let image = this.uploadedFile?.id;
 
       if (phone) {
         const data = this.$form.value
-        phone = phone.replace(/[()\s-]/g, '');
+        phone = phone.toString().replace(/[()\s-]/g, '');
         data.phone = parseInt(phone, 10)
+
+        if(image){
+          data.image = image
+        }
 
         this.$disableBtn = true;
         if (this.$id) {
@@ -185,14 +201,41 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
     }
   }
 
-
-  // File Upload
-  onBasicUploadAuto(event: UploadEvent) {
-    // this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
-  }
-
   changeTypeCheck(value:boolean){
     this.is_disable = value
     this.cdr.detectChanges()
   }
+
+
+  // File Upload
+  onUpload(event: any, fileType: 'image', fileInput: any) {
+    for (let file of event.files) {
+      this.uploadFile(file, fileType, fileInput);
+    }
+  }
+
+  private uploadFile(file: File, fileType: 'image', fileInput: any) {
+    if (fileType === 'image') {
+      this.filesService.uploadImage(file).subscribe({
+        next: (response) => {
+          this.is_uploaded = true
+          this.uploadedFile = response
+          this.imageSrc = this.filesService.getView(this.uploadedFile.id)
+          fileInput.clear();
+
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: `${file.name} yuklandi.` });
+        },
+        error: (err) => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: `Yuklanmadi ${file.name}.` });
+        }
+      });
+    } 
+  }
+
+  clearImage(){
+    this.is_uploaded = false
+    this.uploadedFile = null
+    this.imageSrc = 'assets/layout/images/avatar.jpg'
+  }
+
 }

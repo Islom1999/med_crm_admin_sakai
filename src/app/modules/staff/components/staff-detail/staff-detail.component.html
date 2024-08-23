@@ -153,19 +153,24 @@
 
                             <div class="flex gap-3">
                                 <p-fileUpload 
+                                    #fileInput
                                     mode="basic" 
                                     name="demo[]" 
                                     chooseIcon="pi pi-upload" 
-                                    url="https://www.primefaces.org/cdn/api/upload.php" 
-                                    accept="image/*" maxFileSize="1000000" 
-                                    (onUpload)="onBasicUploadAuto($event)"  
+                                    accept="image/*" [maxFileSize]="3 * 1024 * 1024" 
                                     [auto]="true" 
                                     chooseLabel="yuklash" 
+                                    (uploadHandler)="onUpload($event, 'image', fileInput)"
+                                    customUpload="true"
+                                    [disabled]="is_uploaded"
                                 />
+
                                 <button 
                                     pButton 
                                     icon="pi pi-trash" 
                                     class="p-button-danger"
+                                    [disabled]="!is_uploaded"
+                                    (click)="clearImage()"
                                 >o'chirish</button>
                             </div>
                             

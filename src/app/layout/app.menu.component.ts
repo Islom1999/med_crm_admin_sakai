@@ -120,7 +120,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: "Qabullar bazasi", 
                                 icon: 'pi pi-fw pi-table', 
-                                // routerLink: ['/'],
+                                routerLink: ['/appointment'],
                             },
                             {
                                 label: "Qabul qo'shish", 

@@ -6,6 +6,7 @@ import { canActivatePermission } from 'src/app/shared';
 import { BaseModule } from 'src/app/base';
 import { FormsModule } from '@angular/forms';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { FileUploadModule } from 'primeng/fileupload';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     
     SelectButtonModule,
+    FileUploadModule,
 
     FormsModule,
   ]

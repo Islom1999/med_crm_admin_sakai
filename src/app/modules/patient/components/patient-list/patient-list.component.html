@@ -1,7 +1,7 @@
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <h5>Hodimlar ro'yhati</h5>
+            <h5>Bemorlar ro'yhati</h5>
             <p-table #dt1 [value]="$data | async" dataKey="id" [rows]="10" [loading]="$loading | async" [rowHover]="true"
                 styleClass="p-datatable-gridlines" [paginator]="true"
                 [globalFilterFields]="['fullname','mobile','email']" responsiveLayout="scroll">

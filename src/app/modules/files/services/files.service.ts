@@ -23,6 +23,10 @@ export class FilesService {
     this.loadAll()
   }
 
+  getView(id: string) {
+    return `${environment.apiUrl}/files/view/${id}`
+  }
+
   loadAll(params?: HttpParams) {
     this.http.get<IFiles[]>(`${this.apiUrl}`, { params })
       .pipe(
