@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppointmentStatusData } from 'src/enumerations';
 
 @Component({
   selector: 'app-appointment-detail',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './appointment-detail.component.scss'
 })
 export class AppointmentDetailComponent {
+  appointmentStatusData = AppointmentStatusData
 
 }

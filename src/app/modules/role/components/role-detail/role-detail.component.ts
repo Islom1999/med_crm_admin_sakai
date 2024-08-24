@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Permission } from 'src/enumerations';
+import { Permission, PermissionData } from 'src/enumerations';
 import { RoleService } from '../../services';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
@@ -17,7 +17,7 @@ import { StaffService } from 'src/app/modules/staff/services';
   providers:[]
 })
 export class RoleDetailComponent extends BaseDetailComponentList<IRole> implements OnInit {
-  permissionsTypes: any[] = Object.values(Permission);
+  permissionsTypes = Object.entries(PermissionData).map(([value, label]) => ({ label, value }));
 
   constructor(
     private baseSrv: RoleService,

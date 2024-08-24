@@ -4,3 +4,10 @@ export enum TransactionStatus {
     PAID = "PAID",
     CANCELED = "CANCELED"
 }
+
+export const TransactionStatusData = {
+    [TransactionStatus.PENDING]: 'kutilmoqda',
+    [TransactionStatus.CREATED]: 'yaratildan',
+    [TransactionStatus.PAID]: 'to\'langan',
+    [TransactionStatus.CANCELED]: 'bekor qilingan',
+}

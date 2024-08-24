@@ -5,7 +5,7 @@ import { ServicesService } from '../../services';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ServiceType } from 'src/enumerations';
+import { ServiceType, ServiceTypeData } from 'src/enumerations';
 import { StaffService } from 'src/app/modules/staff/services';
 import { Observable } from 'rxjs';
 import { RoomsService } from 'src/app/modules/rooms/services';
@@ -17,7 +17,7 @@ import { HttpParams } from '@angular/common/http';
   styleUrl: './services-detail.component.scss'
 })
 export class ServicesDetailComponent extends BaseDetailComponentList<IServices> {
-  type: any[] = Object.values(ServiceType);
+  type = Object.entries(ServiceTypeData).map(([value, label]) => ({ label, value }));
   staff!: IStaff[]
   room!: IRoom[]
   select_type: string

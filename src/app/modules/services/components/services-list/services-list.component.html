@@ -10,9 +10,10 @@
                         <div class="field col-3">
                             <p-dropdown 
                                 [options]="type" 
-                                formControlName="type" 
                                 [showClear]="true"
                                 [readonly]="select_type ? true : false"
+                                optionLabel="label" 
+                                optionValue="value"
                             ></p-dropdown>
                         </div>
 
@@ -81,7 +82,7 @@
                             {{data_item.name}}
                         </td>
                         <td>
-                            <span [class]="'customer-badge status-proposal mx-1'">{{data_item.type}}</span>
+                            <span [class]="'customer-badge status-proposal mx-1'">{{serviceTypeData[data_item.type]}}</span>
                         </td>
                         <!-- <td>
                             {{data_item.desc}}

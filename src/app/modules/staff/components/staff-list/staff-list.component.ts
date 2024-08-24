@@ -7,6 +7,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PermissionService } from 'src/app/shared';
+import { StaffTypeData } from 'src/enumerations';
 
 @Component({
   selector: 'app-staff-list',
@@ -15,6 +16,8 @@ import { PermissionService } from 'src/app/shared';
   providers: [DialogService]
 })
 export class StaffListComponent extends BaseComponentList<IStaff> {
+  staffTypeData = StaffTypeData
+
   constructor(
     baseSrv: StaffService,
     permission: PermissionService,

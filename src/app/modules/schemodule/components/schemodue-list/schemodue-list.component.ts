@@ -8,6 +8,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PermissionService } from 'src/app/shared';
 import { ActivatedRoute } from '@angular/router';
+import { SchemoduleTypeData } from 'src/enumerations';
 
 @Component({
   selector: 'app-schemodue-list',
@@ -17,6 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SchemodueListComponent extends BaseComponentList<ISchemodule>{
   type?:string
+  schemoduleTypeData = SchemoduleTypeData
 
   constructor(
     baseSrv: SchemodueService,

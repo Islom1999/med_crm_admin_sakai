@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FilesService } from '../../services';
-import { T } from '@fullcalendar/core/internal-common';
 import { NgxPermissionsService } from 'ngx-permissions';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { Observable, catchError, of } from 'rxjs';
@@ -16,7 +15,7 @@ import { FilesInfoComponent } from '../files-info/files-info.component';
   selector: 'app-files-list',
   templateUrl: './files-list.component.html',
   styleUrl: './files-list.component.scss',
-  providers: [DialogService]
+  providers: [DialogService, ConfirmationService]
 })
 export class FilesListComponent {
   loading: Observable<Boolean> = this.baseSrv._loading.pipe()
@@ -75,6 +74,19 @@ export class FilesListComponent {
   delete(id: string | undefined): void {
     if (!id) return
     this.baseSrv.delete(id)
+      .pipe(
+        catchError(({ error }) => {
+          this.messageService.add({ severity: 'error', summary: `Error {error.code}`, detail: `Eror message: {error.message}` })
+          return of();
+        })
+      )
+      .subscribe((data) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data deleted' })
+      })
+  }
+
+  deleteAllState(): void {
+    this.baseSrv.deleteForceByState()
       .pipe(
         catchError(({ error }) => {
           this.messageService.add({ severity: 'error', summary: `Error {error.code}`, detail: `Eror message: {error.message}` })

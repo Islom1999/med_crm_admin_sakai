@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PermissionService } from 'src/app/shared';
 import { BaseComponentList } from 'src/app/base';
+import { AppointmentStatusData } from 'src/enumerations';
 
 @Component({
   selector: 'app-appointment-list',
@@ -15,6 +16,8 @@ import { BaseComponentList } from 'src/app/base';
   providers: [DialogService]
 })
 export class AppointmentListComponent extends BaseComponentList<IAppointment> {
+  appointmentStatusData = AppointmentStatusData
+
   constructor(
     baseSrv: AppointmentService,
     permission: PermissionService,

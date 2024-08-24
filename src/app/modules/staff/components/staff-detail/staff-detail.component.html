@@ -57,6 +57,8 @@
                                         formControlName="gender" 
                                         [showClear]="true"
                                         [readonly]="is_disable"
+                                        optionLabel="label" 
+                                        optionValue="value"
                                     ></p-dropdown>
                                 </div>
 
@@ -88,8 +90,13 @@
                                 </div>
                                 <div class="field col-12 md:col-4">
                                     <label>turi</label>
-                                    <p-dropdown [options]="type" formControlName="staff_type"
-                                        [showClear]="true"></p-dropdown>
+                                    <p-dropdown 
+                                        [options]="type" 
+                                        formControlName="staff_type" 
+                                        [showClear]="true"
+                                        optionLabel="label" 
+                                        optionValue="value"
+                                    ></p-dropdown>
                                 </div>
 
                                 <div class="field col-12 md:col-4">

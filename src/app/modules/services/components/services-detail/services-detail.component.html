@@ -27,6 +27,8 @@
                                         formControlName="type" 
                                         [showClear]="true"
                                         [readonly]="select_type ? true : false"
+                                        optionLabel="label" 
+                                        optionValue="value"
                                     ></p-dropdown>
                                 </div>
                                 <div *ngIf="isType('doctor')" class="field col-12 md:col-6">

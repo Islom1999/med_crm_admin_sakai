@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { IRole } from 'src/interfaces/role';
 import { RoleService } from '../../services';
-import { NgxPermissionsService } from 'ngx-permissions';
+import { NgxPermissionsData, NgxPermissionsService } from 'ngx-permissions';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { RoleDetailComponent } from '../role-detail/role-detail.component';
 import { BaseComponentList } from 'src/app/base';
 import { PermissionService } from 'src/app/shared';
+import { PermissionData } from 'src/enumerations';
 
 @Component({
   selector: 'app-role-list',
@@ -15,6 +16,8 @@ import { PermissionService } from 'src/app/shared';
   providers: [DialogService]
 })
 export class RoleListComponent extends BaseComponentList<IRole> implements OnInit {
+  permissionData = PermissionData
+  
   constructor(
     baseSrv: RoleService,
     permission: PermissionService,

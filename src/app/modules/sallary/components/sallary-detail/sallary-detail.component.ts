@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SallaryService } from '../../services';
-import { SallaryType } from 'src/enumerations';
+import { SallaryType, SallaryTypeData } from 'src/enumerations';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -14,7 +14,7 @@ import { BaseComponentList, BaseDetailComponentList } from 'src/app/base';
   styleUrl: './sallary-detail.component.scss'
 })
 export class SallaryDetailComponent extends BaseDetailComponentList<ISallary>{
-  type: any[] = Object.values(SallaryType);
+  type = Object.entries(SallaryTypeData).map(([value, label]) => ({ label, value }));
   staff!: IStaff[]
 
   constructor(
@@ -57,6 +57,16 @@ export class SallaryDetailComponent extends BaseDetailComponentList<ISallary>{
     } else {
       this.$loading = false;
       this.$disableBtn = false;
+    }
+  }
+
+  isDisablePersentage(){
+    const type = this.$form.get('salary_type').value 
+    if(type == SallaryType.hour_percentage || type == SallaryType.fixed_percentage){
+      return true
+    }else{
+      this.$form.patchValue({percentage:0});
+      return false
     }
   }
 }

@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { catchError, of } from 'rxjs';
-import { StaffType, Gender } from 'src/enumerations';
+import { StaffType, Gender, GenderData } from 'src/enumerations';
 import { FilesService } from 'src/app/modules/files/services';
 
 @Component({
@@ -15,8 +15,7 @@ import { FilesService } from 'src/app/modules/files/services';
   styleUrl: './patient-detail.component.scss'
 })
 export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
-  type: any[] = Object.values(StaffType);
-  gender: any[] = Object.values(Gender);
+  gender = Object.entries(GenderData).map(([value, label]) => ({ label, value }));
   imageSrc: string | null = 'assets/layout/images/avatar.jpg';
   is_disable=false
 
@@ -125,7 +124,8 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
                 })
   
                 this.baseSrv.getUserDataImage(userData.pinfl.toString(), formattedDateOfBirth).subscribe((data) => {
-                  this.imageSrc = `data:${data.contentType};base64,${data.photo}`;
+                  this.imageSrc = this.filesService.getView(data.id);
+                  this.uploadedFile = data
                 })
                 this.$messageService.add({ severity: 'success', summary: 'Success', detail: 'Data come' })
               });

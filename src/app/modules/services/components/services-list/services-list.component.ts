@@ -8,7 +8,7 @@ import { PermissionService } from 'src/app/shared';
 import { BaseComponentList } from 'src/app/base';
 import { ServicesDetailComponent } from '../services-detail/services-detail.component';
 import { CurrencyPipe } from '@angular/common';
-import { ServiceType } from 'src/enumerations';
+import { ServiceType, ServiceTypeData } from 'src/enumerations';
 
 @Component({
   selector: 'app-services-list',
@@ -17,7 +17,8 @@ import { ServiceType } from 'src/enumerations';
   providers: [DialogService, CurrencyPipe]
 })
 export class ServicesListComponent extends BaseComponentList<IServices> implements OnInit {
-  type: any[] = Object.values(ServiceType);
+  type = Object.entries(ServiceTypeData).map(([value, label]) => ({ label, value }));
+  serviceTypeData = ServiceTypeData
   
   constructor(
     baseSrv: ServicesService,

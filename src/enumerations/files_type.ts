@@ -3,3 +3,9 @@ export enum FilesType{
     docs = 'docs',
     video = 'video',
 }
+
+export const FilesTypeData = {
+    [FilesType.image] : 'image',
+    [FilesType.video] : 'video',
+    [FilesType.docs] : 'docs',
+}

@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <form [formGroup]="$form" (submit)="$submit()">
                             <div class="p-fluid p-formgrid grid">
-                                <div class="field col-12 md:col-12">
+                                <div [class]="'field col-12 md:col-' + (isDisablePersentage() ? '12' : '6')">
                                     <label>hodim</label>
                                     <p-dropdown 
                                         [options]="staff" 
@@ -35,7 +35,7 @@
                                         [showClear]="true"
                                     ></p-dropdown>
                                 </div>
-                                <div class="field col-12 md:col-6">
+                                <div *ngIf="isDisablePersentage()" class="field col-12 md:col-6">
                                     <label>ulushi</label>
                                     <p-inputNumber 
                                         formControlName="percentage" 

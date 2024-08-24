@@ -7,6 +7,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PermissionService } from 'src/app/shared';
+import { GenderData } from 'src/enumerations';
 
 @Component({
   selector: 'app-patient-list',
@@ -15,6 +16,8 @@ import { PermissionService } from 'src/app/shared';
   providers: [DialogService]
 })
 export class PatientListComponent extends BaseComponentList<IPatient> {
+  genderData = GenderData
+  
   constructor(
     baseSrv: PatientService,
     permission: PermissionService,

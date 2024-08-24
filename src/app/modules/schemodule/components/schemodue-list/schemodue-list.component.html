@@ -75,7 +75,7 @@
                             {{data_item.notes}}
                         </td>
                         <td>
-                            <span [class]="'customer-badge status-proposal mx-1'">{{data_item.schemodule_type}}</span>
+                            <span [class]="'customer-badge status-proposal mx-1'">{{schemoduleTypeData[data_item.schemodule_type]}}</span>
                         </td>
                         <td *ngIf="isType('weeks')">
                             {{ 

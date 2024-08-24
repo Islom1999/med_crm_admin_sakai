@@ -86,7 +86,7 @@
                             {{ data_item.phone }}
                         </td>
                         <td>
-                            <span [class]="'customer-badge status-qualified'">{{data_item.status}}</span>
+                            <span [class]="'customer-badge status-qualified'">{{appointmentStatusData[data_item.status]}}</span>
                         </td>
                         <td>
                             <span [class]="'customer-badge status-' + (data_item.state == 1 ? 'qualified':'unqualified')">{{data_item.state == 1 ? 'active':"deleted"}}</span>

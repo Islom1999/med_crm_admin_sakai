@@ -53,7 +53,7 @@
                         </td>
                         <td>
                             <span *ngFor="let item of data_item.permissions"
-                                [class]="'customer-badge status-proposal mx-1'">{{item}}</span>
+                                [class]="'customer-badge status-proposal mx-1'">{{permissionData[item]}}</span>
                         </td>
                         <td>
                             <span [class]="'customer-badge status-' + (data_item.state == 1 ? 'qualified':'unqualified')">{{data_item.state == 1 ? 'active':"deleted"}}</span>

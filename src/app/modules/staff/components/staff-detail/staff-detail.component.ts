@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { BaseDetailComponentList } from 'src/app/base';
 import { IDepartament, IFiles, IRole, IStaff } from 'src/interfaces';
 import { StaffService } from '../../services';
-import { Gender, StaffType } from 'src/enumerations';
+import { Gender, GenderData, StaffType, StaffTypeData } from 'src/enumerations';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -23,8 +23,8 @@ interface UploadEvent {
   styleUrl: './staff-detail.component.scss'
 })
 export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
-  type: any[] = Object.values(StaffType);
-  gender: any[] = Object.values(Gender);
+  type = Object.entries(StaffTypeData).map(([value, label]) => ({ label, value }));
+  gender = Object.entries(GenderData).map(([value, label]) => ({ label, value }));
   role!: IRole[]
   department!: IDepartament[]
   imageSrc: string | null = 'assets/layout/images/avatar.jpg';
@@ -152,7 +152,8 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
                 })
   
                 this.baseSrv.getUserDataImage(userData.pinfl.toString(), formattedDateOfBirth).subscribe((data) => {
-                  this.imageSrc = `data:${data.contentType};base64,${data.photo}`;
+                  this.imageSrc = this.filesService.getView(data.id);
+                  this.uploadedFile = data
                 })
                 this.$messageService.add({ severity: 'success', summary: 'Success', detail: 'Data come' })
               });

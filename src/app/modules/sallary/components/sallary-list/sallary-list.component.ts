@@ -7,6 +7,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { PermissionService } from 'src/app/shared';
+import { SallaryTypeData } from 'src/enumerations';
 
 @Component({
   selector: 'app-sallary-list',
@@ -15,6 +16,8 @@ import { PermissionService } from 'src/app/shared';
   providers: [DialogService]
 })
 export class SallaryListComponent extends BaseComponentList<ISallary> {
+  sallaryTypeData = SallaryTypeData
+
   constructor(
     baseSrv: SallaryService,
     permission: PermissionService,
