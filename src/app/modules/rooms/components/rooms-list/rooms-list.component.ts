@@ -44,7 +44,9 @@ export class RoomsListComponent extends BaseComponentList<IRoom> {
 
   override ngOnInit(): void {
     this.is_occupied = this.route.snapshot.data['is_occupied'];
-    this.$params = this.$baseSrv.getParams().set('is_occupied', this.is_occupied);
+    if(this.is_occupied != undefined){
+      this.$params = this.$baseSrv.getParams().set('is_occupied', this.is_occupied);
+    }
     this.$baseSrv.updateParams(this.$params);
     super.ngOnInit()
   }

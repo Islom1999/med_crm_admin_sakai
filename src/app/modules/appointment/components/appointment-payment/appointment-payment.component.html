@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <form [formGroup]="$form" (submit)="$submit()">
                             <div class="p-fluid p-formgrid grid">
-                                <div class="field col-12 md:col-4">
+                                <div class="field col-12 md:col-6">
                                     <label>bemor</label>
                                     <p-dropdown 
                                         [options]="patinet" 
@@ -27,7 +27,7 @@
                                         [showClear]="false"
                                     ></p-dropdown>
                                 </div>
-                                <div class="field col-12 md:col-4">
+                                <div class="field col-12 md:col-6">
                                     <label>qabul vaqti</label>
                                     <p-calendar 
                                         type="date" 
@@ -36,41 +36,16 @@
                                         [showIcon]="true" 
                                     />
                                 </div>
-                                <div class="field col-12 md:col-4">
+                                <div class="field col-12 md:col-3">
                                     <label>holati</label>
-                                    <p-dropdown [options]="appointmentStatusData"
+                                    <p-dropdown [options]="transactionStatusData"
                                         formControlName="status"
                                         [showClear]="false"
                                         optionLabel="label" 
                                         optionValue="value"
                                     ></p-dropdown>
                                 </div>
-                                
-                                <div class="field col-12">
-                                    <label>xizmatlar</label>
-                                    <div>
-                                        <p-multiSelect 
-                                            class="p-multiSelect multiselect-custom" 
-                                            formControlName="service_id" 
-                                            [options]="services"
-                                            display="chip" 
-                                            optionLabel="name"
-                                            optionValue="id"
-                                            (onChange)="calculateTotalPrice($event.value)"
-                                        >
-                                            <ng-template let-item pTemplate="item">
-                                                <div class="flex align-items-center">
-                                                    <span class="ml-2">{{ item.name }} - {{item.price_list[0].price}} so'm</span>
-                                                </div>
-                                            </ng-template>
-                                        </p-multiSelect>
-                                    </div>
-                                </div>
-
-                                <div class="field flex align-items-center col-12 md:col-6">
-                                    <p>({{ totalPrice }} so'm) x ({{totalDiscount}}%) = {{totalPrice * (1 - totalDiscount/100)}} so'm</p>
-                                </div>
-                                <div class="field col-12 md:col-6">
+                                <div class="field col-12 md:col-3">
                                     <label>chegirma</label>
                                     <p-inputNumber 
                                         formControlName="discount" 
@@ -84,6 +59,41 @@
                                     >
                                     </p-inputNumber>
                                 </div>
+                                <div class="field col-12 md:col-3">
+                                    <label>to'lov usuli</label>
+                                    <p-dropdown [options]="paymentProviderData"
+                                        formControlName="provider"
+                                        [showClear]="false"
+                                        optionLabel="label" 
+                                        optionValue="value"
+                                    ></p-dropdown>
+                                </div>
+                                <div class="field col-12 md:col-3">
+                                    <label>narxi</label>
+                                    <p-inputNumber 
+                                        formControlName="price" 
+                                        mode="currency"
+                                        currency="UZS" 
+                                        locale="de-DE"
+                                        [showButtons]="true" 
+                                        [min]="0" [max]="20000000"
+                                        [step]="5000" 
+                                        [useGrouping]="true"
+                                    >
+                                    </p-inputNumber>
+                                </div>
+                                
+                                <div class="field flex align-items-center col-12 md:col-6">
+                                    <div>
+                                        <label>xizmatlar:</label>
+                                        <p *ngFor="let item of appointmentServices">{{item.service.name}} - {{item.price}} so'm</p>
+                                    </div>
+                                </div>
+
+                                <div class="field flex align-items-center col-12 md:col-6">
+                                    <p>({{ totalPrice }} so'm) x ({{totalDiscount}}%) = {{(totalPrice * (1 - totalDiscount/100)).toFixed(2)}} so'm</p>
+                                </div>
+                                
                             </div>
                             <div class="mt-5 flex gap-3">
                                 <button type="button" pButton [label]="'qaytish'" class="text-center p-button-secondary" (click)="$back()"></button>

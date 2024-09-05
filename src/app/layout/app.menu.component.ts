@@ -61,7 +61,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: "Davolash tarixi", 
                                 icon: 'pi pi-fw pi-history', 
-                                routerLink: ['/appointment'],
+                                // routerLink: ['/appointment'],
                             },
                             {
                                 label: "Xizmatlar", 
@@ -122,15 +122,15 @@ export class AppMenuComponent implements OnInit {
                                 icon: 'pi pi-fw pi-table', 
                                 routerLink: ['/appointment'],
                             },
-                            {
-                                label: "Qabul qo'shish", 
-                                icon: 'pi pi-fw pi-plus-circle', 
-                                // routerLink: ['/'],
-                            },
+                            // {
+                            //     label: "Qabul qo'shish", 
+                            //     icon: 'pi pi-fw pi-plus-circle', 
+                            //     routerLink: ['/appointment/transactions'],
+                            // },
                             {
                                 label: "Kassa", 
                                 icon: 'pi pi-fw pi-chart-line', 
-                                // routerLink: ['/'], 
+                                routerLink: ['/appointment/transactions'], 
                             }
                         ] 
                     },

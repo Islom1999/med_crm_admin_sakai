@@ -97,8 +97,10 @@ export class ServicesDetailComponent extends BaseDetailComponentList<IServices> 
 
       if (this.$id) {
         this.$update(this.$id, {...data});
+        // this.roomSrv.getAll()
       } else {
         this.$create({...data});
+        // this.roomSrv.getAll()
       }
     } else {
       Object.values(this.$form.controls).forEach((control) => {

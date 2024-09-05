@@ -42,16 +42,12 @@ export class RoomsDetailComponent extends BaseDetailComponentList<IRoom> {
       // }
     }
 
-    this.baseSrv.getAll(params).subscribe((staff) => {
-      this.rooms = staff
+    this.baseSrv.getAll(params).subscribe((item) => {
+      this.rooms = item
     })
 
     this.type_id = this.$config.data.type_id;
     this.parent_id = this.$config.data.parent_id;
-
-    console.log(this.type_id, this.parent_id, this.$config.data.id)
-
-    
 
     // forma elementlari
     this.$form = new FormGroup({
@@ -69,8 +65,6 @@ export class RoomsDetailComponent extends BaseDetailComponentList<IRoom> {
       type_id: this.type_id,
       parent_id: this.parent_id,
     })
-
-    console.log(this.$form.value)
 
     super.ngOnInit()
   }
