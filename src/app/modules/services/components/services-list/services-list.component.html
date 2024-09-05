@@ -63,11 +63,11 @@
                                 holati
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <!-- <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
                                 o'zgartirilgan
                             </div>
-                        </th>
+                        </th> -->
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
                                 boshqarish
@@ -94,11 +94,11 @@
                             {{ getLatestValidPrice(data_item) | customCurrency }}
                         </td>
                         <td>
-                            <span [class]="'customer-badge status-' + (data_item.state == 1 ? 'qualified':'unqualified')">{{data_item.state == 1 ? 'active':"deleted"}}</span>
+                            <span [class]="'customer-badge status-' + (data_item.is_public ? 'qualified':'unqualified')">{{data_item.is_public ? 'public':"private"}}</span>
                         </td>
-                        <td>
+                        <!-- <td>
                             {{data_item.updated_id}} ta o'zgartirilgan
-                        </td>
+                        </td> -->
                         <td class="table-action">
                             <span class="p-buttonset">
                                 <ng-container *ngxPermissionsOnly="['super']">

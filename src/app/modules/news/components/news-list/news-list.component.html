@@ -1,10 +1,10 @@
 <div class="grid">
     <div class="col-12">
         <div class="card">
-            <h5>Hodimlar ro'yhati</h5>
+            <h5>Yangiliklar ro'yhati</h5>
             <p-table #dt1 [value]="$data | async" dataKey="id" [rows]="10" [loading]="$loading | async" [rowHover]="true"
                 styleClass="p-datatable-gridlines" [paginator]="true"
-                [globalFilterFields]="['name','permissions','state']" responsiveLayout="scroll">
+                [globalFilterFields]="['title']" responsiveLayout="scroll">
                 <ng-template pTemplate="caption">
                     <div class="flex justify-content-between flex-column sm:flex-row">
                         <span class="p-input-icon-left mb-2">
@@ -20,27 +20,12 @@
                     <tr>
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
-                                Ism familiyasi
+                                title
                             </div>
                         </th>
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
-                                turi
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                lavozimi
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                millati
-                            </div>
-                        </th>
-                        <th style="min-width: 12rem">
-                            <div class="flex justify-content-between align-items-center">
-                                mobile raqami
+                                sanasi
                             </div>
                         </th>
                         <th style="min-width: 12rem">
@@ -48,11 +33,11 @@
                                 holati
                             </div>
                         </th>
-                        <!-- <th style="min-width: 12rem">
+                        <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
                                 o'zgartirilgan
                             </div>
-                        </th> -->
+                        </th>
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
                                 boshqarish
@@ -64,26 +49,17 @@
                 <ng-template pTemplate="body" let-data_item>
                     <tr>
                         <td>
-                            {{data_item.fullname}}
+                            {{data_item.title}}
                         </td>
                         <td>
-                            <span [class]="'customer-badge status-proposal mx-1'">{{staffTypeData[data_item.staff_type]}}</span>
-                        </td>
-                        <td>
-                            {{data_item.role.name}}
-                        </td>
-                        <td>
-                            {{ data_item.nationality }}
-                        </td>
-                        <td>
-                            {{ data_item.phone }}
+                            {{data_item.date | date : 'MM.dd.yyyy, hh:mm' }}
                         </td>
                         <td>
                             <span [class]="'customer-badge status-' + (data_item.is_public ? 'qualified':'unqualified')">{{data_item.is_public ? 'public':"private"}}</span>
                         </td>
-                        <!-- <td>
+                        <td>
                             {{data_item.updated_id}} ta o'zgartirilgan
-                        </td> -->
+                        </td>
                         <td class="table-action">
                             <span class="p-buttonset">
                                 <ng-container *ngxPermissionsOnly="['super']">

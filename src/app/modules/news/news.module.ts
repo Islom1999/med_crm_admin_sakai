@@ -1,33 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ServicesDetailComponent, ServicesListComponent } from './components';
-import { RouterModule, Routes } from '@angular/router';
-import { canActivatePermission, CustomCurrencyPipe } from 'src/app/shared';
-import { BaseModule } from 'src/app/base';
+import { NewsDetailComponent, NewsListComponent } from './components';
+import { Routes, RouterModule } from '@angular/router';
 import { FileUploadModule } from 'primeng/fileupload';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { BaseModule } from 'src/app/base';
+import { canActivatePermission } from 'src/app/shared';
 
 const routes: Routes = [
   {
     path: '',
-    component: ServicesListComponent,
+    component: NewsListComponent,
     canActivate: [canActivatePermission],
     data: { permissions: ['super'] },
   }
 ];
 
-
 @NgModule({
   declarations: [
-    ServicesListComponent,
-    ServicesDetailComponent,
-    CustomCurrencyPipe
+    NewsListComponent,
+    NewsDetailComponent
   ],
   imports: [
     CommonModule,
+
     BaseModule,
     RouterModule.forChild(routes),
 
     FileUploadModule,
+    SelectButtonModule,
   ]
 })
-export class ServicesModule { }
+export class NewsModule { }

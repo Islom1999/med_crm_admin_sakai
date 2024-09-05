@@ -13,14 +13,14 @@
             
             <ng-container *ngIf="!$loading">
                 <div class="flex align-items-center justify-content-center">
-                    <div class="col-12">
+                    <div class="col-12 md:col-8">
                         <form [formGroup]="$form" (submit)="$submit()">
                             <div class="p-fluid p-formgrid grid">
                                 <div class="field col-12 md:col-12">
                                     <label for="name">nomi</label>
                                     <input formControlName="name" id="name" pInputText type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
                                 </div>
-                                <div class="field col-12 md:col-6">
+                                <div class="field col-12 md:col-4">
                                     <label>turi</label>
                                     <p-dropdown 
                                         [options]="type" 
@@ -31,7 +31,7 @@
                                         optionValue="value"
                                     ></p-dropdown>
                                 </div>
-                                <div *ngIf="isType('doctor')" class="field col-12 md:col-6">
+                                <div *ngIf="isType('doctor')" class="field col-12 md:col-4">
                                     <label>hodim</label>
                                     <p-dropdown 
                                         [options]="staff" 
@@ -42,7 +42,7 @@
                                         [showClear]="true"
                                     ></p-dropdown>
                                 </div>
-                                <div *ngIf="isType('room')" class="field col-12 md:col-6">
+                                <div *ngIf="isType('room')" class="field col-12 md:col-4">
                                     <label>xona</label>
                                     <p-dropdown 
                                         [options]="room" 
@@ -52,6 +52,15 @@
                                         [filter]="true"
                                         [showClear]="true"
                                         [readonly]="true"
+                                    ></p-dropdown>
+                                </div>
+                                <div class="field col-12 md:col-4">
+                                    <label>holati</label>
+                                    <p-dropdown 
+                                        [options]="is_public" 
+                                        formControlName="is_public" 
+                                        [showClear]="true"
+                                        optionValue="value"
                                     ></p-dropdown>
                                 </div>
                                 <div class="field col-12 md:col-6">
@@ -84,7 +93,7 @@
                                 <div class="field col-12 md:col-12">
                                     <label for="">ma'lumot</label>
                                     <div>
-                                        <p-editor formControlName="desc"/>
+                                        <p-editor formControlName="descr"/>
                                     </div>
                                 </div>
                             </div>
@@ -93,6 +102,41 @@
                                 <button pButton [label]="$id ? 'o\'zgartirish' : 'qo\'shish'" class="text-center" [disabled]="$disableBtn"></button>
                             </div>
                         </form>
+                    </div>
+                    <div class="col-12 md:col-4">
+                        <div class="card flex justify-content-center align-items-center flex-column">
+                            <p-image 
+                                [src]="imageSrc" 
+                                [previewImageSrc]="imageSrc" 
+                                alt="Image" 
+                                width="250" 
+                                [preview]="true" />
+
+                            <div class="flex gap-3">
+                                <p-fileUpload 
+                                    #fileInput
+                                    mode="basic" 
+                                    name="demo[]" 
+                                    chooseIcon="pi pi-upload" 
+                                    accept="image/*" [maxFileSize]="3 * 1024 * 1024" 
+                                    [auto]="true" 
+                                    chooseLabel="yuklash" 
+                                    (uploadHandler)="onUpload($event, 'image', fileInput)"
+                                    customUpload="true"
+                                    [disabled]="is_uploaded"
+                                />
+
+                                <button 
+                                    pButton 
+                                    icon="pi pi-trash" 
+                                    class="p-button-danger"
+                                    [disabled]="!is_uploaded"
+                                    (click)="clearImage()"
+                                >o'chirish</button>
+                            </div>
+                            
+                            
+                        </div>
                     </div>
                 </div>
             </ng-container>

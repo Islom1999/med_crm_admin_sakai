@@ -13,6 +13,7 @@ export interface IStaff extends IBase{
     address:         string;
     date_of_birth:   Date;
     bio:             string;
+    is_public:       boolean;
     staff_type:      string;
     is_block:        boolean;
     department_id:   string;

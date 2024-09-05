@@ -76,6 +76,12 @@ import { canActivatePermission } from './shared';
                         canActivate: [canActivatePermission],
                         data: { permissions: ['super'] }
                     },
+                    { 
+                        path: 'news', 
+                        loadChildren: () => import('./modules').then(m => m.NewsModule), 
+                        canActivate: [canActivatePermission],
+                        data: { permissions: ['super'] }
+                    },
                 ]
             },
             { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },

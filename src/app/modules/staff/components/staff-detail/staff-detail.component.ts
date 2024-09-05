@@ -11,12 +11,6 @@ import { DepartamentService } from 'src/app/modules/departament/services';
 import { catchError, Observable, of } from 'rxjs';
 import { FilesService } from 'src/app/modules/files/services';
 
-
-interface UploadEvent {
-  originalEvent: Event;
-  files: File[];
-}
-
 @Component({
   selector: 'app-staff-detail',
   templateUrl: './staff-detail.component.html',
@@ -27,12 +21,13 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
   gender = Object.entries(GenderData).map(([value, label]) => ({ label, value }));
   role!: IRole[]
   department!: IDepartament[]
-  imageSrc: string | null = 'assets/layout/images/avatar.jpg';
   is_disable=false
-
+  
+  imageSrc: string | null = 'assets/layout/images/avatar.jpg';
   uploadedFile!:IFiles;
   is_uploaded = false;
   type_check = [{label: "Passport ma'lumotlar", value: true},{label: "Qo'lda kiritish", value: false}]
+  is_public = [{ label:"Public", value:true },{ label:"Private", value:false }]
   
   constructor(
     private baseSrv: StaffService,
@@ -69,6 +64,7 @@ export class StaffDetailComponent extends BaseDetailComponentList<IStaff> {
       address: new FormControl('', []),
       date_of_birth: new FormControl('', []),
       bio: new FormControl('', []),
+      is_public: new FormControl('', []),
       staff_type: new FormControl('', [Validators.required]),
       department_id: new FormControl('', [Validators.required]),
       role_id: new FormControl('', [Validators.required]),

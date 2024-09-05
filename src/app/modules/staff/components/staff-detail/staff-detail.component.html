@@ -99,7 +99,7 @@
                                     ></p-dropdown>
                                 </div>
 
-                                <div class="field col-12 md:col-4">
+                                <div class="field col-12 md:col-3">
                                     <label>molile raqam</label>
                                     <p-inputMask 
                                         mask="(99) 999-99-99" 
@@ -107,12 +107,12 @@
                                         class="">
                                     </p-inputMask>
                                 </div>
-                                <div class="field col-12 md:col-4">
+                                <div class="field col-12 md:col-3">
                                     <label>email</label>
                                     <input formControlName="email" pInputText type="email"
                                         class="">
                                 </div>
-                                <div class="field col-12 md:col-4">
+                                <div class="field col-12 md:col-3">
                                     <label>password</label>
                                     <p-password formControlName="password" [toggleMask]="true">
                                         <ng-template pTemplate="header">
@@ -130,6 +130,15 @@
                                             </ul>
                                         </ng-template>
                                     </p-password>
+                                </div>
+                                <div class="field col-12 md:col-3">
+                                    <label>holati</label>
+                                    <p-dropdown 
+                                        [options]="is_public" 
+                                        formControlName="is_public" 
+                                        [showClear]="true"
+                                        optionValue="value"
+                                    ></p-dropdown>
                                 </div>
 
 

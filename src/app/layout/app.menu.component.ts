@@ -32,6 +32,11 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-wallet', 
                         // routerLink: ['/'],
                     },
+                    { 
+                        label: "Yangiliklar", 
+                        icon: 'pi pi-fw pi-images', 
+                        routerLink: ['/news'],
+                    },
                 ],
             },
             {

@@ -135,5 +135,4 @@ export class AppointmentPaymentComponent extends BaseDetailComponentList<IAppoin
     const discountedPrice = this.totalPrice * (1 - this.totalDiscount / 100);
     this.$form.patchValue({ price: discountedPrice });
   }
-
 }

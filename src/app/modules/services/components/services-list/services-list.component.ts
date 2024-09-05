@@ -39,7 +39,7 @@ export class ServicesListComponent extends BaseComponentList<IServices> implemen
   showUpdateModal(type:string, id?:string) {
     this.$ref = this.$dialogService.open(ServicesDetailComponent, {
       header: id ? "Xizmatni o'zgartirish" : "Xizmat qo'shish",
-      width: '50vw',
+      width: '80vw',
       contentStyle: { overflow: 'auto' },
       breakpoints: {
         '960px': '75vw',
