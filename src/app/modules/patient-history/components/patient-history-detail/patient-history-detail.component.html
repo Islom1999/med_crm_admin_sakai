@@ -1,0 +1,77 @@
+<div class="grid p-fluid">
+    <div class="col-12">
+        <div class="card">
+            <ng-container *ngIf="$loading">
+                <p-skeleton height="5rem" styleClass="mb-2" />
+                <p-skeleton styleClass="mb-2" />
+                <p-skeleton height="5rem" styleClass="mb-2" />
+                <div class="flex justify-content-evenly mt-3">
+                    <p-skeleton styleClass="mb-2" width="15rem" height="2rem"/>
+                    <p-skeleton styleClass="mb-2" width="15rem" height="2rem"/> 
+                </div>
+            </ng-container>
+            
+            <ng-container *ngIf="!$loading">
+                <div class="flex align-items-center justify-content-center">
+                    <div class="col-12 md:col-12">
+                        <form [formGroup]="$form" (submit)="$submit()">
+                            <div class="p-fluid p-formgrid grid">
+                                <div class="field col-8">
+                                    <label for="name">mazmuni</label>
+                                    <input formControlName="name" id="name" pInputText type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+                                </div>
+                                <div class="field col-12 md:col-4">
+                                    <label>sanasi</label>
+                                    <p-calendar type="date" dateFormat="dd.mm.yy" formControlName="date"
+                                        [showIcon]="true"/>
+                                </div>
+                                <div class="field col-12 md:col-4">
+                                    <label>bemor</label>
+                                    <p-dropdown 
+                                        [options]="patinet" 
+                                        optionLabel="fullname" 
+                                        optionValue="id"
+                                        formControlName="patient_id" 
+                                        [filter]="true"
+                                        [showClear]="false"
+                                        (onChange)="getServices($event.value)"
+                                    ></p-dropdown>
+                                </div>
+                                <div class="field col-12 md:col-4">
+                                    <label>xizmat</label>
+                                    <p-dropdown 
+                                        [options]="services" 
+                                        optionLabel="service.name" 
+                                        optionValue="id"
+                                        formControlName="appointment_id"
+                                        [filter]="true"
+                                        [showClear]="false"
+                                    ></p-dropdown>
+                                </div>
+                                <div class="field col-12 md:col-4">
+                                    <label>holati</label>
+                                    <p-dropdown 
+                                        [options]="is_public" 
+                                        formControlName="is_public" 
+                                        [showClear]="true"
+                                        optionValue="value"
+                                    ></p-dropdown>
+                                </div>
+                                <div class="field col-12">
+                                    <label for="">tashxis</label>
+                                    <div>
+                                        <p-editor formControlName="descr"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-5 flex gap-3">
+                                <button type="button" pButton [label]="'qaytish'" class="text-center p-button-secondary" (click)="$back()"></button>
+                                <button pButton [label]="$id ? 'o\'zgartirish' : 'qo\'shish'" class="text-center" [disabled]="$disableBtn"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

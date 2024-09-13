@@ -28,11 +28,21 @@ export interface IAppointService extends IBase {
     staff: IStaff
     service: IServices
     price_list: IPriceList
+    queue_list: IQueueList
 }
 
 export interface PaymentDto {
     discount: number;
     provider: PaymentProvider;
     status: TransactionStatus;
-  }
+}
+
+export interface IQueueList extends IBase {
+    number: number;
+    name: string;
+    date: Date;
+    appointment_id: string;
+}
+
+
   

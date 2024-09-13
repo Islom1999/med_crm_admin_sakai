@@ -22,11 +22,11 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-home', 
                         routerLink: ['/'],
                     },
-                    { 
-                        label: "Statistika", 
-                        icon: 'pi pi-fw pi-chart-pie', 
-                        // routerLink: ['/'],
-                    },
+                    // { 
+                    //     label: "Statistika", 
+                    //     icon: 'pi pi-fw pi-chart-pie', 
+                    //     // routerLink: ['/'],
+                    // },
                     { 
                         label: "To'lovlar", 
                         icon: 'pi pi-fw pi-wallet', 
@@ -66,7 +66,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: "Davolash tarixi", 
                                 icon: 'pi pi-fw pi-history', 
-                                // routerLink: ['/appointment'],
+                                routerLink: ['patient-history/doctor'],
                             },
                             {
                                 label: "Xizmatlar", 
@@ -100,21 +100,21 @@ export class AppMenuComponent implements OnInit {
                                 icon: 'pi pi-fw pi-table', 
                                 routerLink: ['/patient'],
                             },
-                            {
-                                label: "To'lovlar", 
-                                icon: 'pi pi-fw pi-credit-card', 
-                                // routerLink: ['/'],
-                            },
+                            // {
+                            //     label: "To'lovlar", 
+                            //     icon: 'pi pi-fw pi-credit-card', 
+                            //     // routerLink: ['/'],
+                            // },
                             {
                                 label: "Tashxislar", 
                                 icon: 'pi pi-fw pi-file-edit', 
-                                // routerLink: ['/'],
+                                routerLink: ['/patient-history'],
                             },
-                            {
-                                label: "Hujjatlar", 
-                                icon: 'pi pi-fw pi-file', 
-                                // routerLink: ['/'],
-                            }
+                            // {
+                            //     label: "Hujjatlar", 
+                            //     icon: 'pi pi-fw pi-file', 
+                            //     // routerLink: ['/'],
+                            // }
                         ] 
                     },
                     { 
@@ -170,16 +170,16 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-table', 
                         routerLink: ['/sallary'],
                     },
-                    { 
-                        label: "Hisobot ish haqi", 
-                        icon: 'pi pi-fw pi-chart-bar', 
-                        // routerLink: ['/'],
-                    },
-                    { 
-                        label: "Xarajatlar", 
-                        icon: 'pi pi-fw pi-wallet', 
-                        // routerLink: ['/'],
-                    }
+                    // { 
+                    //     label: "Hisobot ish haqi", 
+                    //     icon: 'pi pi-fw pi-chart-bar', 
+                    //     // routerLink: ['/'],
+                    // },
+                    // { 
+                    //     label: "Xarajatlar", 
+                    //     icon: 'pi pi-fw pi-wallet', 
+                    //     // routerLink: ['/'],
+                    // }
                 ],
             },
             {
@@ -195,11 +195,11 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-cog', 
                         routerLink: ['/files'],
                     },
-                    { 
-                        label: "Tashqi xizmatlar", 
-                        icon: 'pi pi-fw pi-key', 
-                        // routerLink: ['/'],
-                    },
+                    // { 
+                    //     label: "Tashqi xizmatlar", 
+                    //     icon: 'pi pi-fw pi-key', 
+                    //     // routerLink: ['/'],
+                    // },
                 ],
             },
         ];
