@@ -20,9 +20,9 @@
                         <tr >
                             <th style="width: 3rem"></th>
                             <th pSortableColumn="name">Nomi <p-sortIcon field="name"></p-sortIcon></th>
-                            <th pSortableColumn="price">statusi<p-sortIcon field="price"></p-sortIcon></th>
-                            <th pSortableColumn="category">holati<p-sortIcon field="category"></p-sortIcon></th>
-                            <th pSortableColumn="rating">o'zgartirilgan<p-sortIcon field="rating"></p-sortIcon></th>
+                            <!-- <th pSortableColumn="price">statusi<p-sortIcon field="price"></p-sortIcon></th> -->
+                            <!-- <th pSortableColumn="category">holati<p-sortIcon field="category"></p-sortIcon></th> -->
+                            <!-- <th pSortableColumn="rating">o'zgartirilgan<p-sortIcon field="rating"></p-sortIcon></th> -->
                             <th pSortableColumn="rating">boshqarish</th>
                         </tr>
                     </ng-template>
@@ -34,15 +34,15 @@
                                     [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                             </td>
                             <td style="min-width: 12rem;">{{data_item.room_name}}</td>
-                            <td style="min-width: 10rem;">
+                            <!-- <td style="min-width: 10rem;">
                                 <span [class]="'customer-badge mx-1 status-' + (data_item.is_occupied ? 'unqualified' : 'proposal')">{{data_item.is_occupied ? "Band" : "Bo'sh"}}</span>
-                            </td>
-                            <td>
-                                <span [class]="'customer-badge status-' + (data_item.state == 1 ? 'qualified':'unqualified')">{{data_item.state == 1 ? 'active':"deleted"}}</span>
-                            </td>
-                            <td>
+                            </td> -->
+                            <!-- <td>
+                                <span [class]="'customer-badge status-' + (data_item.is_public ? 'qualified':'unqualified')">{{data_item.is_public ? 'public':"private"}}</span>
+                            </td> -->
+                            <!-- <td>
                                 {{data_item.updated_id}} ta o'zgartirilgan
-                            </td>
+                            </td> -->
                             <td class="table-action">
                                 <span class="p-buttonset">
                                     <ng-container *ngxPermissionsOnly="['super']">
@@ -72,8 +72,8 @@
                                                 <th pSortableColumn="name">Nomi <p-sortIcon field="name"></p-sortIcon></th>
                                                 <th pSortableColumn="price">statusi<p-sortIcon field="price"></p-sortIcon></th>
                                                 <th pSortableColumn="price">narxi<p-sortIcon field="price"></p-sortIcon></th>
-                                                <th pSortableColumn="category">holati<p-sortIcon field="category"></p-sortIcon></th>
-                                                <th pSortableColumn="rating">o'zgartirilgan<p-sortIcon field="rating"></p-sortIcon></th>
+                                                <!-- <th pSortableColumn="category">holati<p-sortIcon field="category"></p-sortIcon></th> -->
+                                                <!-- <th pSortableColumn="rating">o'zgartirilgan<p-sortIcon field="rating"></p-sortIcon></th> -->
                                                 <th pSortableColumn="rating">boshqarish</th>
                                             </tr>
                                         </ng-template>
@@ -89,12 +89,12 @@
                                                     <span [class]="'customer-badge status-proposal mx-1'">{{item.is_occupied ? "Band" : "Bo'sh"}}</span>
                                                 </td>
                                                 <td style="min-width: 12rem;">{{getLatestValidPrice(item)}}</td>
-                                                <td>
+                                                <!-- <td>
                                                     <span [class]="'customer-badge status-' + (item.state == 1 ? 'qualified':'unqualified')">{{item.state == 1 ? 'active':"deleted"}}</span>
-                                                </td>
-                                                <td>
+                                                </td> -->
+                                                <!-- <td>
                                                     {{item.updated_id}} ta o'zgartirilgan
-                                                </td>
+                                                </td> -->
                                                 <td class="table-action">
                                                     <span class="p-buttonset">
                                                         <ng-container *ngxPermissionsOnly="['super']">

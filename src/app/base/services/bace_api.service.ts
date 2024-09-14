@@ -45,7 +45,7 @@ export abstract class BaseApiService<T> {
 
   // @Cacheable()
   getAll(params?: HttpParams): Observable<T[]> {
-    return this.http.get<T[]>(`${this.apiUrl}`, { params });
+    return this.http.get<T[]>(`${this.apiUrl}`, { params: this._paramsSubject.value });
   }
 
   // @Cacheable()

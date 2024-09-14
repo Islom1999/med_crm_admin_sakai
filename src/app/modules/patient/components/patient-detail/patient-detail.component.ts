@@ -173,7 +173,7 @@ export class PatientDetailComponent extends BaseDetailComponentList<IPatient> {
             control.updateValueAndValidity({ onlySelf: true });
           }
         });
-      }
+    }
   }
 
   changeTypeCheck(value:boolean){

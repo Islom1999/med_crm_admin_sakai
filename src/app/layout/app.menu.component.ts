@@ -75,22 +75,22 @@ export class AppMenuComponent implements OnInit {
                             }
                         ] 
                     },
-                    { 
-                        label: "Ish vaqtlari", 
-                        icon: 'pi pi-fw pi-calendar', 
-                        items: [
-                            {
-                                label: "Ish vaqtlari", 
-                                icon: 'pi pi-fw pi-calendar-plus', 
-                                routerLink: ['/schemodule/weeks'],
-                            },
-                            {
-                                label: "Bayramlar", 
-                                icon: 'pi pi-fw pi-calendar-minus', 
-                                routerLink: ['/schemodule/holiday'],
-                            }
-                        ] 
-                    },
+                    // { 
+                    //     label: "Ish vaqtlari", 
+                    //     icon: 'pi pi-fw pi-calendar', 
+                    //     items: [
+                    //         {
+                    //             label: "Ish vaqtlari", 
+                    //             icon: 'pi pi-fw pi-calendar-plus', 
+                    //             routerLink: ['/schemodule/weeks'],
+                    //         },
+                    //         {
+                    //             label: "Bayramlar", 
+                    //             icon: 'pi pi-fw pi-calendar-minus', 
+                    //             routerLink: ['/schemodule/holiday'],
+                    //         }
+                    //     ] 
+                    // },
                     { 
                         label: "Bemorlar", 
                         icon: 'pi pi-fw pi-user-plus', 
@@ -148,40 +148,40 @@ export class AppMenuComponent implements OnInit {
                                 icon: 'pi pi-fw pi-table', 
                                 routerLink: ['/rooms'],
                             },
-                            {
-                                label: "Bo'sh xonalar", 
-                                icon: 'pi pi-fw pi-lock-open', 
-                                routerLink: ['/rooms/empty'],
-                            },
-                            {
-                                label: "Band xonalar", 
-                                icon: 'pi pi-fw pi-unlock', 
-                                routerLink: ['/rooms/occupied'],
-                            }
+                            // {
+                            //     label: "Bo'sh xonalar", 
+                            //     icon: 'pi pi-fw pi-lock-open', 
+                            //     routerLink: ['/rooms/empty'],
+                            // },
+                            // {
+                            //     label: "Band xonalar", 
+                            //     icon: 'pi pi-fw pi-unlock', 
+                            //     routerLink: ['/rooms/occupied'],
+                            // }
                         ] 
                     }
                 ],
             },
-            {
-                label: "Bugalteriya",
-                items: [
-                    { 
-                        label: "Ish haqi", 
-                        icon: 'pi pi-fw pi-table', 
-                        routerLink: ['/sallary'],
-                    },
-                    // { 
-                    //     label: "Hisobot ish haqi", 
-                    //     icon: 'pi pi-fw pi-chart-bar', 
-                    //     // routerLink: ['/'],
-                    // },
-                    // { 
-                    //     label: "Xarajatlar", 
-                    //     icon: 'pi pi-fw pi-wallet', 
-                    //     // routerLink: ['/'],
-                    // }
-                ],
-            },
+            // {
+            //     label: "Bugalteriya",
+            //     items: [
+            //         { 
+            //             label: "Ish haqi", 
+            //             icon: 'pi pi-fw pi-table', 
+            //             routerLink: ['/sallary'],
+            //         },
+            //         { 
+            //             label: "Hisobot ish haqi", 
+            //             icon: 'pi pi-fw pi-chart-bar', 
+            //             // routerLink: ['/'],
+            //         },
+            //         { 
+            //             label: "Xarajatlar", 
+            //             icon: 'pi pi-fw pi-wallet', 
+            //             // routerLink: ['/'],
+            //         }
+            //     ],
+            // },
             {
                 label: "Core",
                 items: [

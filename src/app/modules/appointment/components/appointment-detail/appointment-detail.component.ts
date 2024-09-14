@@ -8,6 +8,7 @@ import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ServicesService } from 'src/app/modules/services/services';
 import { PatientService } from 'src/app/modules/patient/services';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-appointment-detail',
@@ -20,6 +21,7 @@ export class AppointmentDetailComponent extends BaseDetailComponentList<IAppoint
   patinet: IPatient[] = []
   totalPrice: number = 0;
   totalDiscount: number = 0;
+  params: HttpParams = new HttpParams();
 
 
   constructor(
@@ -34,6 +36,9 @@ export class AppointmentDetailComponent extends BaseDetailComponentList<IAppoint
   }
 
   override ngOnInit(): void {
+    this.params = new HttpParams().set('type', 'doctor')
+    this.serviceSrv.updateParams(this.params)
+
     this.serviceSrv.getAll().subscribe(data => {
       this.services = data
     })

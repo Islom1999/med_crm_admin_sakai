@@ -13,42 +13,42 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   styleUrl: './departament-detail.component.scss'
 })
 export class DepartamentDetailComponent extends BaseDetailComponentList<IDepartament> {
-  public Editor = ClassicEditor;
-  public editorConfig = {
-    toolbar: [
-      'heading', '|',
-      'bold', 'italic', 'underline', 'strikethrough', '|',
-      'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
-      'link', 'bulletedList', 'numberedList', 'blockQuote', '|',
-      'insertTable', 'tableColumn', 'tableRow', 'mergeTableCells', '|',
-      'undo', 'redo', '|',
+  // public Editor = ClassicEditor;
+  // public editorConfig = {
+  //   toolbar: [
+  //     'heading', '|',
+  //     'bold', 'italic', 'underline', 'strikethrough', '|',
+  //     'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
+  //     'link', 'bulletedList', 'numberedList', 'blockQuote', '|',
+  //     'insertTable', 'tableColumn', 'tableRow', 'mergeTableCells', '|',
+  //     'undo', 'redo', '|',
      
-    ],
-    heading: {
-      options: [
-        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-        // Boshqa sozlamalar...
-      ]
-    },
-    table: {
-      contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
-    },
-    exportPdf: {
-      stylesheets: [ '/path/to/styles.css' ],
-      fileName: 'document.pdf',
-      pageMargins: [ 20, 20, 20, 20 ],
-      // Boshqa sozlamalar...
-    },
-    exportWord: {
-      fileName: 'document.docx',
-      stylesheets: [ '/path/to/word.css' ],
-      // Boshqa sozlamalar...
-    },
-    // Boshqa plagin sozlamalari...
-  };
+  //   ],
+  //   heading: {
+  //     options: [
+  //       { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+  //       { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+  //       { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+  //       { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+  //       // Boshqa sozlamalar...
+  //     ]
+  //   },
+  //   table: {
+  //     contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells' ]
+  //   },
+  //   exportPdf: {
+  //     stylesheets: [ '/path/to/styles.css' ],
+  //     fileName: 'document.pdf',
+  //     pageMargins: [ 20, 20, 20, 20 ],
+  //     // Boshqa sozlamalar...
+  //   },
+  //   exportWord: {
+  //     fileName: 'document.docx',
+  //     stylesheets: [ '/path/to/word.css' ],
+  //     // Boshqa sozlamalar...
+  //   },
+  //   // Boshqa plagin sozlamalari...
+  // };
 
   constructor(
     private baseSrv: DepartamentService,

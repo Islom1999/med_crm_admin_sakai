@@ -33,11 +33,11 @@
                                 holati
                             </div>
                         </th>
-                        <th style="min-width: 12rem">
+                        <!-- <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
                                 o'zgartirilgan
                             </div>
-                        </th>
+                        </th> -->
                         <th style="min-width: 12rem">
                             <div class="flex justify-content-between align-items-center">
                                 boshqarish
@@ -52,14 +52,14 @@
                             {{data_item.title}}
                         </td>
                         <td>
-                            {{data_item.date | date : 'MM.dd.yyyy, hh:mm' }}
+                            {{data_item.date | date : 'MM.dd.yyyy' }}
                         </td>
                         <td>
                             <span [class]="'customer-badge status-' + (data_item.is_public ? 'qualified':'unqualified')">{{data_item.is_public ? 'public':"private"}}</span>
                         </td>
-                        <td>
+                        <!-- <td>
                             {{data_item.updated_id}} ta o'zgartirilgan
-                        </td>
+                        </td> -->
                         <td class="table-action">
                             <span class="p-buttonset">
                                 <ng-container *ngxPermissionsOnly="['super']">
